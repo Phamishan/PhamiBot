@@ -18,6 +18,7 @@ module.exports = {
         const embed = new EmbedBuilder()
             .setTitle('Server Info')
             .setDescription(`${name}'s server information`)
+            .setColor(0XFF0000)
             .addFields(
                 { name: ':calendar: Created at', value: `<t:${creationDate}>`, inline: true },
                 { name: ':crown: Owned by', value: `${owner}`, inline: true },

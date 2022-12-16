@@ -10,7 +10,8 @@ module.exports = {
 
         const embed = new EmbedBuilder()
             .setTitle('Commands')
-            .setDescription(`${name}'s Commands`)
+            .setDescription(`${name}'s commands`)
+            .setColor(0XFF0000)
             .addFields(
                 { name: ':robot: - ```/commands```', value: `Overblik over alle commands.` },
                 { name: ':ping_pong: - ```/ping```', value: `Sender Pong tilbage.` },
