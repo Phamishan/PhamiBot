@@ -12,8 +12,9 @@ const test = new EmbedBuilder()
     .setColor(0XFF0000)
     .addFields(
         { name: ':robot: - ```/commands```', value: `Overblik over alle commands.` },
-        { name: ':ping_pong: - ```/ping```', value: `Sender Pong tilbage.` },
+        { name: ':ping_pong: - ```/ping```', value: `Sender pong tilbage.` },
         { name: ':crown: - ```/patrick```', value: `Hvad mon det her er?? :eyes::eyes::eyes:` },
+        { name: ':rofl: - ```/placeholdermeme```', value: `Sender et tilfældigt placeholder meme.` },
         { name: ':scroll: - ```/server```', value: `Server info.` },
     )
 

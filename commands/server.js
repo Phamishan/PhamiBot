@@ -3,7 +3,8 @@ const { SlashCommandBuilder, EmbedBuilder, ChannelType } = require('discord.js')
 module.exports = {
     data: new SlashCommandBuilder()
         .setName('server')
-        .setDescription('Displays information about the server'),
+        .setDescription('Server info.'),
+
     async execute(interaction) {
         const guild = interaction.guild;
         const name = guild.name;
@@ -15,17 +16,18 @@ module.exports = {
         const voiceChannels = guild.channels.cache.filter((c) =>
             c.type === ChannelType.GuildVoice).size;
         const roles = guild.roles.cache.size;
+        
         const embed = new EmbedBuilder()
             .setTitle('Server Info')
             .setDescription(`${name}'s server information`)
             .setColor(0XFF0000)
             .addFields(
-                { name: ':calendar: Created at', value: `<t:${creationDate}>`, inline: true },
-                { name: ':crown: Owned by', value: `${owner}`, inline: true },
-                { name: ':busts_in_silhouette: Member count', value: `${members}`, inline: true },
+                { name: ':calendar: Oprettet:', value: `<t:${creationDate}>`, inline: true },
+                { name: ':crown: Ejet af:', value: `${owner}`, inline: true },
+                { name: ':busts_in_silhouette: Antal medlemmer:', value: `${members}`, inline: true },
                 { name: ':speech_balloon: Text channels', value: `${textChannels}`, inline: true },
                 { name: ':microphone2: Voice channels', value: `${voiceChannels}`, inline: true },
-                { name: ':label: Roles', value: `${roles}`, inline: true },
+                { name: ':label: Antal roller:', value: `${roles}`, inline: true },
             )
         await interaction.reply({ embeds: [embed] });
     },

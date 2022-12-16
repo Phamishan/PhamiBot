@@ -1,6 +1,8 @@
 const { SlashCommandBuilder } = require('discord.js');
 
-var pics = [{ files: ["pics/AddisonRae1.jpg"] }, { files: ["pics/AddisonRae2.png"] }, { files: ["pics/AddisonRae3.png"] }];
+const filePath = "pics/addisonRae/";
+
+var pics = [{ files: [filePath + "addisonRae1.jpg"] }, { files: [filePath + "addisonRae2.png"] }, { files: [filePath + "addisonRae3.png"] }, { files: [filePath + "addisonRae4.jpg"] }, { files: [filePath + "addisonRae5.jpg"] }, { files: [filePath + "addisonRae6.jpg"] }, { files: [filePath + "addisonRae7.jpg"] }];
 
 module.exports = {
     data: new SlashCommandBuilder()
