@@ -50,7 +50,11 @@ module.exports = {
           inline: true,
         },
         { name: ":label: Antal roller:", value: `${roles}`, inline: true }
-      );
+      )
+      .setFooter({
+        text: "Created by @ph4m1",
+        iconURL: "https://i.imgur.com/pcy4SD7.png",
+      });
     await interaction.reply({ embeds: [embed] });
   },
 };

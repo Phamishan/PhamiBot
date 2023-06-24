@@ -27,8 +27,13 @@ module.exports = {
           name: ":rofl: - ```/placeholdermeme```",
           value: `Sender et tilfældigt placeholder meme.`,
         },
-        { name: ":scroll: - ```/server```", value: `Server info.` }
-      );
+        { name: ":scroll: - ```/server```", value: `Server info.` },
+        { name: ":gun: - ```/valrank```", value: `Valorant info.` }
+      )
+      .setFooter({
+        text: "Created by @ph4m1",
+        iconURL: "https://i.imgur.com/pcy4SD7.png",
+      });
     await interaction.reply({ embeds: [embed] });
   },
 };

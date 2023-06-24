@@ -16,7 +16,8 @@ const getPlayerRank = async (name, tag, req, res) => {
     return data;
   } catch (error) {
     // res.status(500).json({ message: 'Something went wrong.' });
-    console.log(error.message);
+    let fejl = error.response;
+    return fejl;
   }
 };
 
