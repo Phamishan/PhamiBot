@@ -18,9 +18,15 @@ module.exports = {
     // Wait for the users input and store that in const input
     const input = await interaction.options.get("input");
 
+    const playerNameAndTag = input.value.split("#");
+    const playerName = playerNameAndTag[0];
+    const playerTag = playerNameAndTag[1];
+
+    console.log(playerName, playerTag);
+
     // Pass the input to the methods which is created in the controllers folder.
-    const playerRank = await getPlayerRank(input.value);
-    const playerInfo = await getPlayerInfo(input.value);
+    const playerRank = await getPlayerRank(playerName, playerTag);
+    const playerInfo = await getPlayerInfo(playerName, playerTag);
 
     // Creating the embed
     const embed = new EmbedBuilder()
@@ -28,6 +34,7 @@ module.exports = {
       .setColor(0xff0000)
       .addFields({
         name: "Rank:",
+        value: `${playerRank.data.images.small}`,
         value: `${playerRank.data.currenttierpatched}`,
         inline: true,
       })
