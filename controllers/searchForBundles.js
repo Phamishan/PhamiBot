@@ -14,8 +14,7 @@ const getBundles = async () => {
 
         return data;
     } catch (error) {
-        let fejl = error.response;
-        return fejl;
+        return error.response;
     }
 };
 

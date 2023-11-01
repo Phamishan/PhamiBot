@@ -14,8 +14,7 @@ const getPlayerInfo = async (name, tag) => {
 
         return data;
     } catch (error) {
-        let fejl = error.response;
-        return fejl;
+        return error.response;
     }
 };
 

@@ -1,6 +1,6 @@
 const axios = require("axios");
 
-const getTeamInfo = async (name, tag, req, res) => {
+const getTeamInfo = async (name, tag) => {
     try {
         const { data } = await axios.get(
             `https://api.henrikdev.xyz/valorant/v1/premier/search?name='${name}'&tag='${tag}'`,
@@ -14,8 +14,7 @@ const getTeamInfo = async (name, tag, req, res) => {
 
         return data;
     } catch (error) {
-        let fejl = error.response;
-        return fejl;
+        return error.response;
     }
 };
 

@@ -1,7 +1,7 @@
-const { SlashCommandBuilder, EmbedBuilder, Guild } = require("discord.js");
+const { SlashCommandBuilder, EmbedBuilder } = require("discord.js");
 
 const getPlayerRank = require("../controllers/searchForPlayerRank.js");
-const getPlayerInfo = require("../controllers/searchForPlayerInfo.js");
+const getPlayerInfoByPUUID = require("../controllers/searchForPlayerInfoByPUUID.js");
 const getLastFiveMatches = require("../controllers/searchForLastFiveMatches.js");
 
 // Create the slash command.
@@ -15,41 +15,61 @@ module.exports = {
     async execute(interaction) {
         await interaction.deferReply();
 
+        let puuid = "796c8a28-4293-5bbf-9183-5d95cdce243a";
         let playerName = "";
         let playerTag = "";
+        let playerInfo = await getPlayerInfoByPUUID(puuid);
 
         if (interaction.user.id == "336187495978893312") {
-            playerName = "PH4M1";
-            playerTag = "YIN";
+            //Phamishan
+            puuid = "796c8a28-4293-5bbf-9183-5d95cdce243a";
+            playerInfo = await getPlayerInfoByPUUID(puuid);
+
+            playerName = playerInfo.data.name;
+            playerTag = playerInfo.data.tag;
         } else if (interaction.user.id == "242237129017524225") {
-            playerName = "EROS";
-            playerTag = "YANG";
+            //Laue
+            puuid = "6176f10e-62ec-5845-8944-44a2225bda89";
+            playerInfo = await getPlayerInfoByPUUID(puuid);
+
+            playerName = playerInfo.data.name;
+            playerTag = playerInfo.data.tag;
         } else if (interaction.user.id == "219518001366433792") {
-            playerName = "RubGoose";
-            playerTag = "EUNE";
+            //Malthe
+            puuid = "fa9712ff-bd06-5ed8-9afa-a82f930e656b";
+            playerInfo = await getPlayerInfoByPUUID(puuid);
+
+            playerName = playerInfo.data.name;
+            playerTag = playerInfo.data.tag;
         } else if (interaction.user.id == "239122763095343104") {
+            //Teis
+            puuid = "b028b686-288d-526c-9c04-2c95be13e95b";
+            playerInfo = await getPlayerInfoByPUUID(puuid);
+
             playerName = "Druumihra";
-            playerTag = "PH4M1";
+            playerTag = "Deity";
         } else if (interaction.user.id == "354319727859859458") {
-            playerName = "ItzPolarBearDK";
-            playerTag = "8068";
+            //Patrick
+            puuid = "9851fa96-8b72-5f43-8bd0-5bba32e5fb09";
+            playerInfo = await getPlayerInfoByPUUID(puuid);
+
+            playerName = playerInfo.data.name;
+            playerTag = playerInfo.data.tag;
         } else if (interaction.user.id == "303120606805622784") {
+            //Jacob
             playerName = "pray2slay";
             playerTag = "1551";
         } else {
             const errorEmbed = new EmbedBuilder()
                 .setTitle(`FEJL`)
                 .setColor(0xff0000)
-                .setDescription(
-                    "ikke en del af OG placeholder, unlucky brormand"
-                );
+                .setDescription("ikke en del af OG placeholder, unlucky");
 
             interaction.editReply({ embeds: [errorEmbed] });
         }
 
         // Pass the input to the methods which is created in the controllers folder.
         const playerRank = await getPlayerRank(playerName, playerTag);
-        const playerInfo = await getPlayerInfo(playerName, playerTag);
         const playerMatches = await getLastFiveMatches(playerName, playerTag);
 
         if (playerRank.status == "404" || playerInfo.status == "404") {

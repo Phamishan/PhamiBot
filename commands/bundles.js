@@ -38,111 +38,24 @@ module.exports = {
                         iconURL: "https://i.imgur.com/pcy4SD7.png",
                     });
 
-                // Creating the embed
-                const item0 = new EmbedBuilder()
-                    .setTitle(
-                        `:moneybag: ${bundles.data[0].items[0].name} | ${bundles.data[0].items[0].base_price} VP :moneybag:`
-                    )
-                    .setColor(0xff0000)
-                    .setImage(`${bundles.data[0].items[0].image}`)
-                    .setTimestamp()
-                    .setFooter({
-                        text: "Created by @phamishan",
-                        iconURL: "https://i.imgur.com/pcy4SD7.png",
-                    });
+                const itemsInBundle = [];
 
-                // Creating the embed
-                const item1 = new EmbedBuilder()
-                    .setTitle(
-                        `:moneybag: ${bundles.data[0].items[1].name} | ${bundles.data[0].items[1].base_price} VP :moneybag:`
-                    )
-                    .setColor(0xff0000)
-                    .setImage(`${bundles.data[0].items[1].image}`)
-                    .setTimestamp()
-                    .setFooter({
-                        text: "Created by @phamishan",
-                        iconURL: "https://i.imgur.com/pcy4SD7.png",
-                    });
+                for (let i = 0; i < bundles.data[0].items.length; i++) {
+                    const item = new EmbedBuilder()
+                        .setTitle(
+                            `:moneybag: ${bundles.data[0].items[i].name} | ${bundles.data[0].items[i].base_price} VP :moneybag:`
+                        )
+                        .setColor(0xff0000)
+                        .setImage(`${bundles.data[0].items[i].image}`)
+                        .setTimestamp()
+                        .setFooter({
+                            text: "Created by @phamishan",
+                            iconURL: "https://i.imgur.com/pcy4SD7.png",
+                        });
 
-                // Creating the embed
-                const item2 = new EmbedBuilder()
-                    .setTitle(
-                        `:moneybag: ${bundles.data[0].items[2].name} | ${bundles.data[0].items[2].base_price} VP :moneybag:`
-                    )
-                    .setColor(0xff0000)
-                    .setImage(`${bundles.data[0].items[2].image}`)
-                    .setTimestamp()
-                    .setFooter({
-                        text: "Created by @phamishan",
-                        iconURL: "https://i.imgur.com/pcy4SD7.png",
-                    });
+                    itemsInBundle.push(item);
+                }
 
-                // Creating the embed
-                const item3 = new EmbedBuilder()
-                    .setTitle(
-                        `:moneybag: ${bundles.data[0].items[3].name} | ${bundles.data[0].items[3].base_price} VP :moneybag:`
-                    )
-                    .setColor(0xff0000)
-                    .setImage(`${bundles.data[0].items[3].image}`)
-                    .setTimestamp()
-                    .setFooter({
-                        text: "Created by @phamishan",
-                        iconURL: "https://i.imgur.com/pcy4SD7.png",
-                    });
-
-                // Creating the embed
-                const item4 = new EmbedBuilder()
-                    .setTitle(
-                        `:moneybag: ${bundles.data[0].items[4].name} | ${bundles.data[0].items[4].base_price} VP :moneybag:`
-                    )
-                    .setColor(0xff0000)
-                    .setImage(`${bundles.data[0].items[4].image}`)
-                    .setTimestamp()
-                    .setFooter({
-                        text: "Created by @phamishan",
-                        iconURL: "https://i.imgur.com/pcy4SD7.png",
-                    });
-
-                /*
-                    // Creating the embed
-                const item5 = new EmbedBuilder()
-                    .setTitle(
-                        `:moneybag: ${bundles.data[0].items[5].name} | ${bundles.data[0].items[5].base_price} VP :moneybag:`
-                    )
-                    .setColor(0xff0000)
-                    .setImage(`${bundles.data[0].items[5].image}`)
-                    .setTimestamp()
-                    .setFooter({
-                        text: "Created by @phamishan",
-                        iconURL: "https://i.imgur.com/pcy4SD7.png",
-                    });
-
-                // Creating the embed
-                const item6 = new EmbedBuilder()
-                    .setTitle(
-                        `:moneybag: ${bundles.data[0].items[6].name} | ${bundles.data[0].items[6].base_price} VP :moneybag:`
-                    )
-                    .setColor(0xff0000)
-                    .setImage(`${bundles.data[0].items[6].image}`)
-                    .setTimestamp()
-                    .setFooter({
-                        text: "Created by @phamishan",
-                        iconURL: "https://i.imgur.com/pcy4SD7.png",
-                    });
-
-                // Creating the embed
-                const item7 = new EmbedBuilder()
-                    .setTitle(
-                        `:moneybag: ${bundles.data[0].items[7].name} | ${bundles.data[0].items[7].base_price} VP :moneybag:`
-                    )
-                    .setColor(0xff0000)
-                    .setImage(`${bundles.data[0].items[7].image}`)
-                    .setTimestamp()
-                    .setFooter({
-                        text: "Created by @phamishan",
-                        iconURL: "https://i.imgur.com/pcy4SD7.png",
-                    });
-*/
                 const viewFullBundle = new ButtonBuilder()
                     .setCustomId("viewFullBundle")
                     .setLabel("View full bundle")
@@ -168,7 +81,7 @@ module.exports = {
 
                     if (confirmation.customId === "viewFullBundle") {
                         await confirmation.update({
-                            embeds: [item0, item1, item2, item3, item4],
+                            embeds: itemsInBundle,
                             components: [],
                         });
                     }

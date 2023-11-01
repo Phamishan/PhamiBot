@@ -35,8 +35,7 @@ const getLastFiveMatches = async (name, tag) => {
         }
         return text;
     } catch (error) {
-        let fejl = error.response;
-        return fejl;
+        return error.response;
     }
 };
 

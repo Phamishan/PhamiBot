@@ -1,9 +1,9 @@
 const axios = require("axios");
 
-const getOverWatchPlayer = async (name, tag) => {
+const getPlayerInfoByPUUID = async (puuid) => {
     try {
         const { data } = await axios.get(
-            `https://overfast-api.tekrop.fr/players/${name}-${tag}/summary`,
+            `https://api.henrikdev.xyz/valorant/v1/by-puuid/account/${puuid}`,
             {
                 headers: {
                     ACCEPT: "application/vnd.api+json",
@@ -17,4 +17,4 @@ const getOverWatchPlayer = async (name, tag) => {
     }
 };
 
-module.exports = getOverWatchPlayer;
+module.exports = getPlayerInfoByPUUID;
