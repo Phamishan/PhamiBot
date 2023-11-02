@@ -1,6 +1,6 @@
 const { SlashCommandBuilder } = require("discord.js");
 
-const filePath = "../pics/placeholderMemes/";
+const filePath = "PhamiBot/pics/placeholderMemes/";
 
 var pics = [
     { files: [filePath + "phamiJoke.png"] },

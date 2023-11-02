@@ -1,6 +1,6 @@
 const { SlashCommandBuilder } = require("discord.js");
 
-const filePath = "../pics/addisonRae/";
+const filePath = "PhamiBot/pics/addisonRae/";
 
 
 var pics = [
