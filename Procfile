@@ -1,0 +1,1 @@
+worker: node ./PhamiBot/index.js

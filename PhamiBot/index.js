@@ -4,7 +4,9 @@ const client = new Client({
     intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMembers],
 });
 const { registerEvents, registerCommands } = require("./utils");
+var deployCommandsFunc = require("./deploy-commands");
 
+deployCommandsFunc.deployCommandsFunc();
 registerEvents(client);
 registerCommands(client);
 
