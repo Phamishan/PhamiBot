@@ -33,7 +33,7 @@ Finds current valorant bundle(s)
 
 * 1.0.0 - 01/11/2023
     * Initial Release
-* 1.0.1
+* 1.1.1
     * New profile picture
     * New bot status
     * Updated join message
