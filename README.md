@@ -38,3 +38,5 @@ Finds current valorant bundle(s)
     * New bot status
     * Updated join message
     * Updated file paths
+* 2.0.0 - 02/11/2023
+    * Host added
