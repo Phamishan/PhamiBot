@@ -7,7 +7,6 @@ const getBundleImage = async () => {
             {
                 headers: {
                     ACCEPT: "application/vnd.api+json",
-                    Authorization: process.env.VL_API,
                 },
             }
         );

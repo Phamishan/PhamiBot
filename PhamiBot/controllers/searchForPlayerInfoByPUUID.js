@@ -1,3 +1,4 @@
+require("dotenv").config();
 const axios = require("axios");
 
 const getPlayerInfoByPUUID = async (puuid) => {

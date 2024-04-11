@@ -24,10 +24,6 @@ const welcomeMessage = new EmbedBuilder()
             value: `Sender pong tilbage.`,
         },
         {
-            name: ":crown: - ```/patrick```",
-            value: `Hvad mon det her er?? :eyes::eyes::eyes:`,
-        },
-        {
             name: ":rofl: - ```/placeholdermeme```",
             value: `Sender et tilfældigt placeholder meme.`,
         },

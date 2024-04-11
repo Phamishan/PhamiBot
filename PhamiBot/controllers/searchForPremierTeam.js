@@ -1,3 +1,4 @@
+require("dotenv").config();
 const axios = require("axios");
 
 const getTeamInfo = async (name, tag) => {
