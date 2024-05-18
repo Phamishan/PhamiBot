@@ -103,7 +103,7 @@ module.exports = {
                     },
                     {
                         name: "Points:",
-                        value: `${teamInfo.data[0].score}` + "/675",
+                        value: `${teamInfo.data[0].score}` + "/600",
                         inline: true,
                     },
                     {

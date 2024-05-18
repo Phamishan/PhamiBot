@@ -42,3 +42,5 @@ Finds current valorant bundle(s)
 -   2.0.1 - 11/04/2024
     -   Removed -/patrick
     -   Optimized code
+-   2.0.2 - 18/05/2024
+    -   Updated -/premier
