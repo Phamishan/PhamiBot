@@ -44,3 +44,5 @@ Finds current valorant bundle(s)
     -   Optimized code
 -   2.0.2 - 18/05/2024
     -   Updated -/premier
+-   2.0.3 - 27/05/2024
+    -   Updated -/valrank

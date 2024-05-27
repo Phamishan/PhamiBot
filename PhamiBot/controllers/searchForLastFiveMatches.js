@@ -29,9 +29,9 @@ const getLastFiveMatches = async (name, tag) => {
                     data.data[i].teams.blue.has_won == true) ||
                 (found.team == "red" && data.data[i].teams.red.has_won == true)
             ) {
-                text = text + "<:goodjob:940900834236071958> ";
+                text = text + "<:goodjob:1244552512321622026> ";
             } else {
-                text = text + "<:cri:940896264680251432> ";
+                text = text + "<:cri:1244552527769370625> ";
             }
         }
         return text;
