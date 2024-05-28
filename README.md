@@ -46,3 +46,8 @@ Finds current valorant bundle(s)
     -   Updated -/premier
 -   2.0.3 - 27/05/2024
     -   Updated -/valrank
+-   2.0.4 - 28/05/2024
+    -   Updated -/valrank
+    -   Updated -/commands
+    -   Updated -/premierteam
+    -   Updated -/me

@@ -36,7 +36,7 @@ module.exports = {
                 },
                 {
                     name: ":family_mmbb: - ```/premierteam```",
-                    value: `Finds Premier teams, eg. placeholder#plh`,
+                    value: `Finds Premier teams, eg. In Ortum#IO`,
                 },
                 {
                     name: ":index_pointing_at_the_viewer::skin-tone-4:  - ```/me```",

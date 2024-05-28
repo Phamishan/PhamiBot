@@ -59,6 +59,13 @@ module.exports = {
             //Jacob
             playerName = "pray2slay";
             playerTag = "1551";
+
+            const jacobEmbed = new EmbedBuilder()
+                .setTitle(`noob`)
+                .setColor(0xff0000)
+                .setDescription("Error: mega noob found");
+
+            interaction.editReply({ embeds: [jacobEmbed] });
         } else {
             const errorEmbed = new EmbedBuilder()
                 .setTitle(`FEJL`)
