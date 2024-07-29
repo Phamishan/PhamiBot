@@ -4,7 +4,7 @@ const axios = require("axios");
 const getTeamInfo = async (name, tag) => {
     try {
         const { data } = await axios.get(
-            `https://api.henrikdev.xyz/valorant/v1/premier/search?name='${name}'&tag='${tag}'`,
+            `https://api.henrikdev.xyz/valorant/v1/premier/${name}/${tag}`,
             {
                 headers: {
                     ACCEPT: "application/vnd.api+json",

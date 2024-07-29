@@ -4,7 +4,7 @@ const axios = require("axios");
 const getPlayerInfo = async (name, tag) => {
     try {
         const { data } = await axios.get(
-            `https://api.henrikdev.xyz/valorant/v1/account/'${name}'/'${tag}'`,
+            `https://api.henrikdev.xyz/valorant/v1/account/${name}/${tag}`,
             {
                 headers: {
                     ACCEPT: "application/vnd.api+json",

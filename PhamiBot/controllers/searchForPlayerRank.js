@@ -4,7 +4,7 @@ const axios = require("axios");
 const getPlayerRank = async (name, tag) => {
     try {
         const { data } = await axios.get(
-            `https://api.henrikdev.xyz/valorant/v1/mmr/eu/'${name}'/'${tag}'`,
+            `https://api.henrikdev.xyz/valorant/v2/mmr/eu/${name}/${tag}`,
             {
                 headers: {
                     ACCEPT: "application/vnd.api+json",
@@ -12,7 +12,6 @@ const getPlayerRank = async (name, tag) => {
                 },
             }
         );
-
         return data;
     } catch (error) {
         return error.response;

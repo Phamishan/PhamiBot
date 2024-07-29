@@ -4,7 +4,7 @@ const axios = require("axios");
 const getLastFiveMatches = async (name, tag) => {
     try {
         const { data } = await axios.get(
-            `https://api.henrikdev.xyz/valorant/v3/matches/eu/'${name}'/'${tag}'`,
+            `https://api.henrikdev.xyz/valorant/v3/matches/eu/${name}/${tag}`,
             {
                 headers: {
                     ACCEPT: "application/vnd.api+json",

@@ -104,22 +104,22 @@ module.exports = {
                     },
                     {
                         name: "Rank:",
-                        value: `${playerRank.data.currenttierpatched}`,
+                        value: `${playerRank.data.current_data.currenttierpatched}`,
                         inline: true,
                     },
                     {
                         name: "RR:",
-                        value: `${playerRank.data.ranking_in_tier}`,
+                        value: `${playerRank.data.current_data.ranking_in_tier}`,
                         inline: true,
                     },
                     {
-                        name: "Last 5 games:",
+                        name: "Last 5 ranked games:",
                         value: `${playerMatches}`,
                         inline: false,
                     }
                 )
-                .setThumbnail(`${playerRank.data.images.small}`)
                 .setImage(`${playerInfo.data.card.wide}`)
+                .setThumbnail(`${playerRank.data.current_data.images.small}`)
                 .setTimestamp()
                 .setFooter({
                     text: "Created by @phamishan",

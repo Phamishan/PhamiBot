@@ -40,12 +40,12 @@ module.exports = {
                     inline: true,
                 },
                 {
-                    name: ":speech_balloon: Text channels",
+                    name: ":speech_balloon: Tekst kanaler",
                     value: `${textChannels}`,
                     inline: true,
                 },
                 {
-                    name: ":microphone2: Voice channels",
+                    name: ":microphone2: Snakke kanaler",
                     value: `${voiceChannels}`,
                     inline: true,
                 },

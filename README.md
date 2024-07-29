@@ -6,9 +6,6 @@
 🤖 - /commands
 Overblik over alle commands.
 
-🏓 - /ping
-Sender pong tilbage.
-
 🤣 - /placeholdermeme
 Sender et tilfældigt placeholder meme.
 
@@ -51,3 +48,10 @@ Finds current valorant bundle(s)
     -   Updated -/commands
     -   Updated -/premierteam
     -   Updated -/me
+-   2.0.5 - 29/07/2024
+    -   Updated -/commands
+    -   Updated -/me
+    -   Updated -/premierteam
+    -   Updated -/server
+    -   Updated -/valrank
+    -   Removed -/ping

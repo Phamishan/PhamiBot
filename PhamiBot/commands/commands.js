@@ -19,10 +19,6 @@ module.exports = {
                     value: `Overblik over alle commands.`,
                 },
                 {
-                    name: ":ping_pong: - ```/ping```",
-                    value: `Sender pong tilbage.`,
-                },
-                {
                     name: ":rofl: - ```/placeholdermeme```",
                     value: `Sender et tilfældigt placeholder meme.`,
                 },

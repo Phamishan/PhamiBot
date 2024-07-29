@@ -87,40 +87,40 @@ module.exports = {
             // Creating the embed
             const embed = new EmbedBuilder()
                 .setTitle(
-                    `:crown: ${teamInfo.data[0].name}` +
+                    `:crown: ${teamInfo.data.name}` +
                         "#" +
-                        `${teamInfo.data[0].tag} :crown:`
+                        `${teamInfo.data.tag} :crown:`
                 )
                 .setColor(0xff0000)
                 .addFields(
                     {
                         name: "Wins:",
-                        value: `${teamInfo.data[0].wins}`,
+                        value: `${teamInfo.data.stats.wins}`,
                     },
                     {
                         name: "Losses:",
-                        value: `${teamInfo.data[0].losses}`,
+                        value: `${teamInfo.data.stats.losses}`,
                     },
                     {
                         name: "Points:",
-                        value: `${teamInfo.data[0].score}` + "/600",
+                        value: `${teamInfo.data.placement.points}` + "/600",
                         inline: true,
                     },
                     {
                         name: "Ranking:",
-                        value: `${teamInfo.data[0].ranking}`,
+                        value: `${teamInfo.data.placement.place}`,
                         inline: true,
                     },
                     {
                         name: "Division:",
-                        value: `${teamInfo.data[0].division}`,
+                        value: `${teamInfo.data.placement.division}`,
                         inline: true,
                     }
                 )
                 .setThumbnail(
                     "https://pbs.twimg.com/media/FuRiZUuWIAYxAJ3?format=png&name=small"
                 )
-                .setImage(teamInfo.data[0].customization.image)
+                .setImage(teamInfo.data.customization.image)
                 .setTimestamp()
                 .setFooter({
                     text: "Created by @phamishan",
