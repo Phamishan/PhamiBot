@@ -8,7 +8,7 @@ const getLastFiveMatches = require("../controllers/searchForLastFiveMatches.js")
 module.exports = {
     data: new SlashCommandBuilder()
         .setName("valrank")
-        .setDescription("Finds valorant profile, eg. ph4m1#yin")
+        .setDescription("Finds Valorant profile, eg. PH4M1#YIN")
         .addStringOption((option) =>
             option
                 .setName("input")
