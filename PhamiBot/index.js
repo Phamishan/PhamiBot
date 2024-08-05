@@ -29,19 +29,19 @@ const welcomeMessage = new EmbedBuilder()
         },
         {
             name: ":gun: - ```/valrank```",
-            value: `Finds valorant profile, eg. ph4m1#yin (RANK NEEDED)`,
+            value: `Finds Valorant profile, eg. PH4M1#YIN`,
         },
         {
             name: ":family_mmbb: - ```/premierteam```",
-            value: `Finds Premier teams, eg. placeholder#plh`,
+            value: `Finds Premier teams, eg. In Ortum#IO`,
         },
         {
             name: ":index_pointing_at_the_viewer::skin-tone-4:  - ```/me```",
-            value: `Finds YOUR valorant profile (ONLY OG PLACEHOLDER) (RANK NEEDED)`,
+            value: `Finds YOUR Valorant profile (ONLY OG PLACEHOLDER & IN ORTUM)`,
         },
         {
             name: ":moneybag: - ```/bundles```",
-            value: `Finds current valorant bundle(s)`,
+            value: `Finds current Valorant bundle(s)`,
         }
     )
     .setTimestamp()

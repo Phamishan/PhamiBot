@@ -9,7 +9,7 @@ module.exports = {
     data: new SlashCommandBuilder()
         .setName("me")
         .setDescription(
-            "Finds YOUR valorant profile (ONLY OG PLACEHOLDER) (RANK NEEDED)"
+            "Finds YOUR Valorant profile (ONLY OG PLACEHOLDER & IN ORTUM)"
         ),
 
     async execute(interaction) {
@@ -57,15 +57,32 @@ module.exports = {
             playerTag = playerInfo.data.tag;
         } else if (interaction.user.id == "303120606805622784") {
             //Jacob
-            //playerName = "pray2slay";
-            //playerTag = "1551";
+            puuid = "13094cd6-3723-595e-8ff4-d0d718a4ed68";
+            playerInfo = await getPlayerInfoByPUUID(puuid);
 
-            const jacobEmbed = new EmbedBuilder()
-                .setTitle(`noob`)
-                .setColor(0xff0000)
-                .setDescription("Error: mega noob found");
+            playerName = playerInfo.data.name;
+            playerTag = playerInfo.data.tag;
+        } else if (interaction.user.id == "104310174105214976") {
+            //Mathias
+            puuid = "bed24b11-7de7-5a5e-98c4-49c677c6b2af";
+            playerInfo = await getPlayerInfoByPUUID(puuid);
 
-            interaction.editReply({ embeds: [jacobEmbed] });
+            playerName = playerInfo.data.name;
+            playerTag = playerInfo.data.tag;
+        } else if (interaction.user.id == "889501948410232842") {
+            //Lucas
+            puuid = "dcf5e34a-5d74-552b-bdeb-e97e3cbb7b80";
+            playerInfo = await getPlayerInfoByPUUID(puuid);
+
+            playerName = playerInfo.data.name;
+            playerTag = playerInfo.data.tag;
+        } else if (interaction.user.id == "469139107025780738") {
+            //Anna
+            puuid = "045af984-6086-5bcf-b18a-20fe69193639";
+            playerInfo = await getPlayerInfoByPUUID(puuid);
+
+            playerName = playerInfo.data.name;
+            playerTag = playerInfo.data.tag;
         } else {
             const errorEmbed = new EmbedBuilder()
                 .setTitle(`FEJL`)

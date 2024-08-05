@@ -13,16 +13,16 @@ Sender et tilfældigt placeholder meme.
 Server info.
 
 🔫 - /valrank
-Finds valorant profile, eg. ph4m1#yin (RANK NEEDED)
+Finds Valorant profile, eg. PH4M1#YIN
 
 👨‍👨‍👦‍👦 - /premierteam
-Finds Premier teams, eg. placeholder#plh
+Finds Premier teams, eg. In Ortum#IO
 
 🫵🏾  - /me
-Finds YOUR valorant profile (ONLY OG PLACEHOLDER) (RANK NEEDED)
+Finds YOUR Valorant profile (ONLY OG PLACEHOLDER & IN ORTUM)
 
 💰 - /bundles
-Finds current valorant bundle(s)
+Finds current Valorant bundle(s)
 ```
 
 ## Version History
@@ -55,3 +55,5 @@ Finds current valorant bundle(s)
     -   Updated -/server
     -   Updated -/valrank
     -   Removed -/ping
+-   2.0.6 - 05/08/2024
+    -   Updated

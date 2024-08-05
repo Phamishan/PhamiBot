@@ -28,7 +28,7 @@ module.exports = {
                 },
                 {
                     name: ":gun: - ```/valrank```",
-                    value: `Finds valorant profile, eg. ph4m1#yin (RANK NEEDED)`,
+                    value: `Finds Valorant profile, eg. PH4M1#YIN`,
                 },
                 {
                     name: ":family_mmbb: - ```/premierteam```",
@@ -36,11 +36,11 @@ module.exports = {
                 },
                 {
                     name: ":index_pointing_at_the_viewer::skin-tone-4:  - ```/me```",
-                    value: `Finds YOUR valorant profile (ONLY OG PLACEHOLDER) (RANK NEEDED)`,
+                    value: `Finds YOUR Valorant profile (ONLY OG PLACEHOLDER & IN ORTUM)`,
                 },
                 {
                     name: ":moneybag: - ```/bundles```",
-                    value: `Finds current valorant bundle(s)`,
+                    value: `Finds current Valorant bundle(s)`,
                 }
             )
             .setTimestamp()
