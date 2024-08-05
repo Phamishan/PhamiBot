@@ -56,4 +56,4 @@ Finds current Valorant bundle(s)
     -   Updated -/valrank
     -   Removed -/ping
 -   2.0.6 - 05/08/2024
-    -   Updated
+    -   Updated -/me
