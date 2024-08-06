@@ -127,7 +127,7 @@ module.exports = {
                 });
 
             // Replying with the embed
-            interaction.editReply({ embeds: [embed] });
+            await interaction.editReply({ embeds: [embed] });
         }
     },
 };

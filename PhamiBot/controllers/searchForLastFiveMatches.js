@@ -4,7 +4,7 @@ const axios = require("axios");
 const getLastFiveMatches = async (name, tag) => {
     try {
         const { data } = await axios.get(
-            `https://api.henrikdev.xyz/valorant/v3/matches/eu/${name}/${tag}`,
+            `https://api.henrikdev.xyz/valorant/v3/matches/eu/${name}/${tag}?mode=competitive`,
             {
                 headers: {
                     ACCEPT: "application/vnd.api+json",
@@ -13,7 +13,6 @@ const getLastFiveMatches = async (name, tag) => {
             }
         );
         let text = "";
-
         for (let i = 0; i < data.data.length; i++) {
             const allPlayers = data.data[i].players.all_players;
             var lowercase = JSON.parse(
