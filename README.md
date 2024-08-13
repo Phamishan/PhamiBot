@@ -60,3 +60,5 @@ Finds current Valorant bundle(s)
 -   2.0.7 - 06/08/2024
     -   Fixed -/me
     -   Fixed -/valrank
+-   2.0.8 - 13/08/2024
+    -   Added

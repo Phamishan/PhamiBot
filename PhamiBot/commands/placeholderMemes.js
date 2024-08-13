@@ -15,6 +15,9 @@ var pics = [
     { files: [filePath + "phamiLoseStreak.jpg"] },
     { files: [filePath + "phamiWIFI.jpg"] },
     { files: [filePath + "phamiWIFI2.jpg"] },
+    { files: [filePath + "cloudvjula.png"] },
+    { files: [filePath + "lauesimba.jpg"] },
+    { files: [filePath + "lauexcaseoh.jpg"] },
 ];
 
 module.exports = {
