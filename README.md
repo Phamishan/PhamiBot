@@ -61,4 +61,4 @@ Finds current Valorant bundle(s)
     -   Fixed -/me
     -   Fixed -/valrank
 -   2.0.8 - 13/08/2024
-    -   Added 3 new memes to -/placeholdermeme
+    -   Added 4 new memes to -/placeholdermeme
