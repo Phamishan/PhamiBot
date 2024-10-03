@@ -83,6 +83,13 @@ module.exports = {
 
             playerName = playerInfo.data.name;
             playerTag = playerInfo.data.tag;
+        } else if (interaction.user.id == "763469137351540767") {
+            //Benjamin
+            puuid = "9aee3e0d-1bd1-5ece-9fed-c6843e11282a";
+            playerInfo = await getPlayerInfoByPUUID(puuid);
+
+            playerName = playerInfo.data.name;
+            playerTag = playerInfo.data.tag;
         } else {
             const errorEmbed = new EmbedBuilder()
                 .setTitle(`FEJL`)
