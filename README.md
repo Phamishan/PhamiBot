@@ -64,3 +64,5 @@ Finds current Valorant bundle(s)
     -   Added 4 new memes to -/placeholdermeme
 -   2.0.9 - 03/10/2024
     -   Updated -/me
+-   2.1.0 - 12/10/2024
+    -   Fixed -/bundles

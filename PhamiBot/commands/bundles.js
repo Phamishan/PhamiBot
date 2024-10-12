@@ -41,6 +41,10 @@ module.exports = {
                 const itemsInBundle = [];
 
                 for (let i = 0; i < bundles.data[0].items.length; i++) {
+                    if (bundles.data[0].items[i].image == null) {
+                        continue;
+                    }
+
                     const item = new EmbedBuilder()
                         .setTitle(
                             `:moneybag: ${bundles.data[0].items[i].name} | ${bundles.data[0].items[i].base_price} VP :moneybag:`
