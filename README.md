@@ -25,6 +25,12 @@ Finds YOUR Valorant profile (ONLY OG PLACEHOLDER & IN ORTUM)
 Finds current Valorant bundle(s)
 ```
 
+## TODO:
+- show all bundles in rotation
+- info card (bundle price) after "view full bundle"
+- match history command
+- autocompletion for valrank command
+
 ## Version History
 
 -   1.0.0 - 01/11/2023
