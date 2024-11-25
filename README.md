@@ -30,6 +30,7 @@ Finds current Valorant bundle(s)
 - info card (bundle price) after "view full bundle"
 - match history command
 - autocompletion for valrank command
+- premier division number -> division name
 
 ## Version History
 
