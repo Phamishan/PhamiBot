@@ -31,6 +31,7 @@ Finds current Valorant bundle(s)
 - match history command
 - autocompletion for valrank command
 - premier division number -> division name
+- draw = loss -> draw = draw
 
 ## Version History
 
