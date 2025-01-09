@@ -28,7 +28,7 @@ module.exports = {
                 // Creating the embed
                 const fullBundle = new EmbedBuilder()
                     .setTitle(
-                        `:nerd: ${bundleImage.data[i].displayName} :nerd:`
+                        `:information_source: ${bundleImage.data[i].displayName} | ${bundles.data[0].bundle_price} VP :information_source:`
                     )
                     .setColor(0xff0000)
                     .setImage(`${bundleImage.data[i].displayIcon}`)
