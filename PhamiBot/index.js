@@ -37,12 +37,16 @@ const welcomeMessage = new EmbedBuilder()
             value: `Finds Valorant profile, eg. PH4M1#YIN`,
         },
         {
-            name: ":family_mmbb: - ```/premierteam```",
-            value: `Finds Premier teams, eg. In Ortum#IO`,
+            name: ":family_man_boy_boy: - ```/valrankfriends```",
+            value: `Finds Valorant profile (ONLY OG PLACEHOLDER & IN ORTUM)`,
         },
         {
             name: ":index_pointing_at_the_viewer::skin-tone-4:  - ```/me```",
             value: `Finds YOUR Valorant profile (ONLY OG PLACEHOLDER & IN ORTUM)`,
+        },
+        {
+            name: ":family_mmbb: - ```/premierteam```",
+            value: `Finds Premier teams, eg. In Ortum#IO`,
         },
         {
             name: ":moneybag: - ```/bundles```",

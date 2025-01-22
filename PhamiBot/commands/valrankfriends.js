@@ -1,31 +1,70 @@
 const { SlashCommandBuilder, EmbedBuilder } = require("discord.js");
 
-const getTeamInfo = require("../controllers/searchForPremierTeam.js");
+const getPlayerRank = require("../controllers/searchForPlayerRank.js");
+const getPlayerInfoByPUUID = require("../controllers/searchForPlayerInfoByPUUID.js");
+const getLastFiveMatches = require("../controllers/searchForLastFiveMatches.js");
+
+let playerName = "";
+let playerTag = "";
 
 // Create the slash command.
 module.exports = {
     data: new SlashCommandBuilder()
-        .setName("premierteam")
-        .setDescription("Finds Premier teams, eg. In Ortum#IO")
+        .setName("valrankfriends")
+        .setDescription(
+            "Finds Valorant profile (ONLY OG PLACEHOLDER & IN ORTUM)"
+        )
         .addStringOption((option) =>
             option
                 .setName("input")
                 .setDescription("input to echo back")
                 .setRequired(true)
+                .addChoices(
+                    {
+                        name: "PH4M1",
+                        value: "796c8a28-4293-5bbf-9183-5d95cdce243a",
+                    },
+                    {
+                        name: "SOREX",
+                        value: "6176f10e-62ec-5845-8944-44a2225bda89",
+                    },
+                    {
+                        name: "POLAR",
+                        value: "9851fa96-8b72-5f43-8bd0-5bba32e5fb09",
+                    },
+                    {
+                        name: "RUBGOOSE",
+                        value: "fa9712ff-bd06-5ed8-9afa-a82f930e656b",
+                    },
+                    {
+                        name: "PATTECARMY",
+                        value: "bed24b11-7de7-5a5e-98c4-49c677c6b2af",
+                    },
+                    {
+                        name: "Z1LVER",
+                        value: "9aee3e0d-1bd1-5ece-9fed-c6843e11282a",
+                    },
+                    {
+                        name: "PRAY2SLAY",
+                        value: "13094cd6-3723-595e-8ff4-d0d718a4ed68",
+                    }
+                )
         ),
     async execute(interaction) {
         await interaction.deferReply();
-        // Wait for the users input and store that in const input
         const input = await interaction.options.get("input");
 
-        const premierNameAndTag = input.value.split("#");
-        let premierName = premierNameAndTag[0];
-        let premierTag = premierNameAndTag[1];
+        // Wait for the users input and store that in const input
+        let playerInfo = await getPlayerInfoByPUUID(input.value);
+
+        playerName = playerInfo.data.name;
+        playerTag = playerInfo.data.tag;
 
         // Pass the input to the methods which is created in the controllers folder.
-        const teamInfo = await getTeamInfo(premierName, premierTag);
+        const playerRank = await getPlayerRank(playerName, playerTag);
+        const playerMatches = await getLastFiveMatches(playerName, playerTag);
 
-        if (teamInfo.status == "404") {
+        if (playerRank.status == "404" || playerInfo.status == "404") {
             // Creating the embed
             const errorEmbed = new EmbedBuilder()
                 .setTitle(`FEJL`)
@@ -35,7 +74,7 @@ module.exports = {
                 );
 
             interaction.editReply({ embeds: [errorEmbed] });
-        } else if (teamInfo.status == "400") {
+        } else if (playerRank.status == "400" || playerInfo.status == "400") {
             // Creating the embed
             const errorEmbed = new EmbedBuilder()
                 .setTitle(`FEJL`)
@@ -45,17 +84,17 @@ module.exports = {
                 );
 
             interaction.editReply({ embeds: [errorEmbed] });
-        } else if (teamInfo.status == "403") {
+        } else if (playerRank.status == "403" || playerInfo.status == "403") {
             // Creating the embed
             const errorEmbed = new EmbedBuilder()
                 .setTitle(`FEJL`)
                 .setColor(0xff0000)
                 .setDescription(
-                    "Request error by the client (missing query for example)"
+                    "Forbidden to connect to the Riot API (mainly maintenance reasons on riot side like patches) or to the HenrikDev API itself because of bot prevention for example"
                 );
 
             interaction.editReply({ embeds: [errorEmbed] });
-        } else if (teamInfo.status == "408") {
+        } else if (playerRank.status == "408" || playerInfo.status == "408") {
             // Creating the embed
             const errorEmbed = new EmbedBuilder()
                 .setTitle(`FEJL`)
@@ -63,7 +102,7 @@ module.exports = {
                 .setDescription("Timeout while fetching riot data");
 
             interaction.editReply({ embeds: [errorEmbed] });
-        } else if (teamInfo.status == "429") {
+        } else if (playerRank.status == "429" || playerInfo.status == "429") {
             // Creating the embed
             const errorEmbed = new EmbedBuilder()
                 .setTitle(`FEJL`)
@@ -73,7 +112,7 @@ module.exports = {
                 );
 
             interaction.editReply({ embeds: [errorEmbed] });
-        } else if (teamInfo.status == "503") {
+        } else if (playerRank.status == "503" || playerInfo.status == "503") {
             // Creating the embed
             const errorEmbed = new EmbedBuilder()
                 .setTitle(`FEJL`)
@@ -84,79 +123,43 @@ module.exports = {
 
             interaction.editReply({ embeds: [errorEmbed] });
         } else {
-            divsionRanks = [
-                "Open 1",
-                "Open 2",
-                "Open 3",
-                "Open 4",
-                "Open 5",
-                "Intermediate 1",
-                "Intermediate 2",
-                "Intermediate 3",
-                "Intermediate 4",
-                "Intermediate 5",
-                "Advanced 1",
-                "Advanced 2",
-                "Advanced 3",
-                "Advanced 4",
-                "Advanced 5",
-                "Elite 1",
-                "Elite 2",
-                "Elite 3",
-                "Elite 4",
-                "Elite 5",
-                "Contender",
-            ];
-
-            for (let i = 0; i < divsionRanks.length; i++) {
-                if (teamInfo.data.placement.division == i) {
-                    divsionRank = divsionRanks[i - 1];
-                }
-            }
-
             // Creating the embed
             const embed = new EmbedBuilder()
                 .setTitle(
-                    `:crown: ${teamInfo.data.name}` +
+                    `:crown: ${playerInfo.data.name}` +
                         "#" +
-                        `${teamInfo.data.tag} :crown:`
+                        `${playerInfo.data.tag} :crown:`
                 )
                 .setColor(0xff0000)
                 .addFields(
                     {
-                        name: "Wins:",
-                        value: `${teamInfo.data.stats.wins}`,
+                        name: "Account level:",
+                        value: `${playerInfo.data.account_level}`,
+                        inline: false,
                     },
                     {
-                        name: "Losses:",
-                        value: `${teamInfo.data.stats.losses}`,
-                    },
-                    {
-                        name: "Points:",
-                        value: `${teamInfo.data.placement.points}` + "/600",
+                        name: "Rank:",
+                        value: `${playerRank.data.current_data.currenttierpatched}`,
                         inline: true,
                     },
                     {
-                        name: "Ranking:",
-                        value: `${teamInfo.data.placement.place}`,
+                        name: "RR:",
+                        value: `${playerRank.data.current_data.ranking_in_tier}`,
                         inline: true,
                     },
                     {
-                        name: "Division:",
-                        value: `${divsionRank}`,
-                        inline: true,
+                        name: "Last 5 ranked games:",
+                        value: `${playerMatches}`,
+                        inline: false,
                     }
                 )
-                .setThumbnail(
-                    "https://pbs.twimg.com/media/FuRiZUuWIAYxAJ3?format=png&name=small"
-                )
-                .setImage(teamInfo.data.customization.image)
+                .setImage(`${playerInfo.data.card.wide}`)
+                .setThumbnail(`${playerRank.data.current_data.images.small}`)
                 .setTimestamp()
                 .setFooter({
                     text: "Created by @phamishan",
                     iconURL: "https://i.imgur.com/sNTzfld.jpg",
                 });
-
             // Replying with the embed
             interaction.editReply({ embeds: [embed] });
         }

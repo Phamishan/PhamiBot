@@ -26,12 +26,10 @@ Finds current Valorant bundle(s)
 ```
 
 ## TODO:
-- show all bundles in rotation
-- info card (bundle price) after "view full bundle"
-- match history command
-- autocompletion for valrank command
-- premier division number -> division name
-- draw = loss -> draw = draw
+
+-   show all bundles in rotation
+-   info card (bundle price) after "view full bundle"
+-   match history command
 
 ## Version History
 
@@ -74,3 +72,8 @@ Finds current Valorant bundle(s)
     -   Updated -/me
 -   2.1.0 - 12/10/2024
     -   Fixed -/bundles
+-   2.1.1 - 22/01/2025
+    -   Fixed "last 5 matches" | draw = loss -> draw = draw
+    -   Fixed -/premierteam | division numbers -> division names
+    -   Added new command -/valrankfriends
+    -   Updated -/commands
