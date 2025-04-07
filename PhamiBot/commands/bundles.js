@@ -6,8 +6,8 @@ const {
     ActionRowBuilder,
 } = require("discord.js");
 
-const getBundles = require("../controllers/searchForBundles.js");
-const getBundleImage = require("../controllers/searchForBundleImage.js");
+const getBundles = require("../controllers/bundles.js");
+const getBundleImage = require("../controllers/bundleImage.js");
 
 // Create the slash command.
 module.exports = {

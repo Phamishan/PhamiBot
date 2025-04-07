@@ -1,19 +1,16 @@
-require("dotenv").config();
-const axios = require("axios");
-
 const getPlayerInfo = async (name, tag) => {
     try {
-        const { data } = await axios.get(
-            `https://api.henrikdev.xyz/valorant/v1/account/${name}/${tag}`,
+        const data = await fetch(
+            `https://api.henrikdev.xyz/valorant/v2/account/${name}/${tag}`,
             {
+                method: "GET",
                 headers: {
                     ACCEPT: "application/vnd.api+json",
                     Authorization: process.env.VL_API,
                 },
             }
         );
-
-        return data;
+        return await data.json();
     } catch (error) {
         return error.response;
     }

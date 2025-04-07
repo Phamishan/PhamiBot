@@ -1,11 +1,9 @@
-require("dotenv").config();
-const axios = require("axios");
-
-const getBundles = async () => {
+const getTeamInfo = async (name, tag) => {
     try {
-        const { data } = await axios.get(
-            `https://api.henrikdev.xyz/valorant/v2/store-featured`,
+        const data = await fetch(
+            `https://api.henrikdev.xyz/valorant/v1/premier/${name}/${tag}`,
             {
+                method: "GET",
                 headers: {
                     ACCEPT: "application/vnd.api+json",
                     Authorization: process.env.VL_API,
@@ -13,10 +11,10 @@ const getBundles = async () => {
             }
         );
 
-        return data;
+        return await data.json();
     } catch (error) {
         return error.response;
     }
 };
 
-module.exports = getBundles;
+module.exports = getTeamInfo;

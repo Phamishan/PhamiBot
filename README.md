@@ -15,11 +15,14 @@ Server info.
 🔫 - /valrank
 Finds Valorant profile, eg. PH4M1#YIN
 
+👨‍👦‍👦 - /valrankfriends
+Finds Valorant profile (ONLY OG PLACEHOLDER & IN ORTUM)
+
+🫵🏾 - /me
+Finds YOUR Valorant profile (ONLY OG PLACEHOLDER & IN ORTUM)
+
 👨‍👨‍👦‍👦 - /premierteam
 Finds Premier teams, eg. In Ortum#IO
-
-🫵🏾  - /me
-Finds YOUR Valorant profile (ONLY OG PLACEHOLDER & IN ORTUM)
 
 💰 - /bundles
 Finds current Valorant bundle(s)
@@ -77,3 +80,6 @@ Finds current Valorant bundle(s)
     -   Fixed -/premierteam | division numbers -> division names
     -   Added new command -/valrankfriends
     -   Updated -/commands
+-   2.1.2 - 07/04/2025
+    -   Updated readme
+    -   Optimized code

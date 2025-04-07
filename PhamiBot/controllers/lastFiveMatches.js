@@ -1,9 +1,6 @@
-require("dotenv").config();
-const axios = require("axios");
-
 const getLastFiveMatches = async (name, tag) => {
     try {
-        const { data } = await axios.get(
+        let data = await fetch(
             `https://api.henrikdev.xyz/valorant/v3/matches/eu/${name}/${tag}?mode=competitive`,
             {
                 headers: {
@@ -12,6 +9,7 @@ const getLastFiveMatches = async (name, tag) => {
                 },
             }
         );
+        data = await data.json();
         let text = "";
         for (let i = 0; i < data.data.length; i++) {
             const allPlayers = data.data[i].players.all_players;

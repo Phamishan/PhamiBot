@@ -1,18 +1,16 @@
-require("dotenv").config();
-const axios = require("axios");
-
 const getPlayerRank = async (name, tag) => {
     try {
-        const { data } = await axios.get(
+        const data = await fetch(
             `https://api.henrikdev.xyz/valorant/v2/mmr/eu/${name}/${tag}`,
             {
+                method: "GET",
                 headers: {
                     ACCEPT: "application/vnd.api+json",
                     Authorization: process.env.VL_API,
                 },
             }
         );
-        return data;
+        return await data.json();
     } catch (error) {
         return error.response;
     }

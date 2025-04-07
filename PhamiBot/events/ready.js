@@ -7,7 +7,7 @@ module.exports = {
         client.user.setPresence({
             activities: [
                 {
-                    name: "VALORANT",
+                    name: "TESTING",
                     type: ActivityType.Playing,
                 },
             ],

@@ -1,6 +1,6 @@
 const { SlashCommandBuilder, EmbedBuilder } = require("discord.js");
 
-const getTeamInfo = require("../controllers/searchForPremierTeam.js");
+const getTeamInfo = require("../controllers/premierTeam.js");
 
 // Create the slash command.
 module.exports = {
@@ -25,140 +25,100 @@ module.exports = {
         // Pass the input to the methods which is created in the controllers folder.
         const teamInfo = await getTeamInfo(premierName, premierTag);
 
-        if (teamInfo.status == "404") {
-            // Creating the embed
+        const errorMessages = {
+            404: "The entity was not found (player/match/general data)",
+            400: "Request error by the client (missing query for example)",
+            403: "Forbidden to connect to the Riot API (mainly maintenance reasons on Riot's side like patches) or to the HenrikDev API itself because of bot prevention for example",
+            408: "Timeout while fetching Riot data",
+            429: 'Rate limit reached (can be global API limit which affects all users or just you, when the "x-ratelimit-remaining" header is 0 then it’s a personal limit)',
+            503: "Riot API seems to be down, API unable to connect",
+        };
+
+        const errorStatus = [teamInfo.status].find(
+            (status) => errorMessages[status]
+        );
+
+        if (errorStatus) {
             const errorEmbed = new EmbedBuilder()
-                .setTitle(`FEJL`)
+                .setTitle("FEJL")
                 .setColor(0xff0000)
-                .setDescription(
-                    "The entity was not found (player/match/general data)"
-                );
-
-            interaction.editReply({ embeds: [errorEmbed] });
-        } else if (teamInfo.status == "400") {
-            // Creating the embed
-            const errorEmbed = new EmbedBuilder()
-                .setTitle(`FEJL`)
-                .setColor(0xff0000)
-                .setDescription(
-                    "Request error by the client (missing query for example)"
-                );
-
-            interaction.editReply({ embeds: [errorEmbed] });
-        } else if (teamInfo.status == "403") {
-            // Creating the embed
-            const errorEmbed = new EmbedBuilder()
-                .setTitle(`FEJL`)
-                .setColor(0xff0000)
-                .setDescription(
-                    "Request error by the client (missing query for example)"
-                );
-
-            interaction.editReply({ embeds: [errorEmbed] });
-        } else if (teamInfo.status == "408") {
-            // Creating the embed
-            const errorEmbed = new EmbedBuilder()
-                .setTitle(`FEJL`)
-                .setColor(0xff0000)
-                .setDescription("Timeout while fetching riot data");
-
-            interaction.editReply({ embeds: [errorEmbed] });
-        } else if (teamInfo.status == "429") {
-            // Creating the embed
-            const errorEmbed = new EmbedBuilder()
-                .setTitle(`FEJL`)
-                .setColor(0xff0000)
-                .setDescription(
-                    'Rate limit reached (can be global API limit which affects all users or just you, when the "x-ratelimit-remaining" header is 0 then its a personal limit)'
-                );
-
-            interaction.editReply({ embeds: [errorEmbed] });
-        } else if (teamInfo.status == "503") {
-            // Creating the embed
-            const errorEmbed = new EmbedBuilder()
-                .setTitle(`FEJL`)
-                .setColor(0xff0000)
-                .setDescription(
-                    "Riot API seems to be down, API unable to connect"
-                );
-
-            interaction.editReply({ embeds: [errorEmbed] });
-        } else {
-            divsionRanks = [
-                "Open 1",
-                "Open 2",
-                "Open 3",
-                "Open 4",
-                "Open 5",
-                "Intermediate 1",
-                "Intermediate 2",
-                "Intermediate 3",
-                "Intermediate 4",
-                "Intermediate 5",
-                "Advanced 1",
-                "Advanced 2",
-                "Advanced 3",
-                "Advanced 4",
-                "Advanced 5",
-                "Elite 1",
-                "Elite 2",
-                "Elite 3",
-                "Elite 4",
-                "Elite 5",
-                "Contender",
-            ];
-
-            for (let i = 0; i < divsionRanks.length; i++) {
-                if (teamInfo.data.placement.division == i) {
-                    divsionRank = divsionRanks[i - 1];
-                }
-            }
-
-            // Creating the embed
-            const embed = new EmbedBuilder()
-                .setTitle(
-                    `:crown: ${teamInfo.data.name}` +
-                        "#" +
-                        `${teamInfo.data.tag} :crown:`
-                )
-                .setColor(0xff0000)
-                .addFields(
-                    {
-                        name: "Wins:",
-                        value: `${teamInfo.data.stats.wins}`,
-                    },
-                    {
-                        name: "Losses:",
-                        value: `${teamInfo.data.stats.losses}`,
-                    },
-                    {
-                        name: "Points:",
-                        value: `${teamInfo.data.placement.points}` + "/600",
-                        inline: true,
-                    },
-                    {
-                        name: "Ranking:",
-                        value: `${teamInfo.data.placement.place}`,
-                        inline: true,
-                    },
-                    {
-                        name: "Division:",
-                        value: `${divsionRank}`,
-                        inline: true,
-                    }
-                )
-                .setThumbnail(
-                    "https://pbs.twimg.com/media/FuRiZUuWIAYxAJ3?format=png&name=small"
-                )
-                .setImage(teamInfo.data.customization.image)
-                .setTimestamp()
-                .setFooter({
-                    text: "Created by @phamishan",
-                    iconURL: "https://i.imgur.com/sNTzfld.jpg",
-                });
-
-            // Replying with the embed
-            interaction.editReply({ embeds: [embed] });
+                .setDescription(errorMessages[errorStatus]);
+            return interaction.editReply({ embeds: [errorEmbed] });
         }
+        divsionRanks = [
+            "Open 1",
+            "Open 2",
+            "Open 3",
+            "Open 4",
+            "Open 5",
+            "Intermediate 1",
+            "Intermediate 2",
+            "Intermediate 3",
+            "Intermediate 4",
+            "Intermediate 5",
+            "Advanced 1",
+            "Advanced 2",
+            "Advanced 3",
+            "Advanced 4",
+            "Advanced 5",
+            "Elite 1",
+            "Elite 2",
+            "Elite 3",
+            "Elite 4",
+            "Elite 5",
+            "Contender",
+        ];
+
+        for (let i = 0; i < divsionRanks.length; i++) {
+            if (teamInfo.data.placement.division == i) {
+                divsionRank = divsionRanks[i - 1];
+            }
+        }
+
+        // Creating the embed
+        const embed = new EmbedBuilder()
+            .setTitle(
+                `:crown: ${teamInfo.data.name}` +
+                    "#" +
+                    `${teamInfo.data.tag} :crown:`
+            )
+            .setColor(0xff0000)
+            .addFields(
+                {
+                    name: "Wins:",
+                    value: `${teamInfo.data.stats.wins}`,
+                },
+                {
+                    name: "Losses:",
+                    value: `${teamInfo.data.stats.losses}`,
+                },
+                {
+                    name: "Points:",
+                    value: `${teamInfo.data.placement.points}` + "/600",
+                    inline: true,
+                },
+                {
+                    name: "Ranking:",
+                    value: `${teamInfo.data.placement.place}`,
+                    inline: true,
+                },
+                {
+                    name: "Division:",
+                    value: `${divsionRank}`,
+                    inline: true,
+                }
+            )
+            .setThumbnail(
+                "https://pbs.twimg.com/media/FuRiZUuWIAYxAJ3?format=png&name=small"
+            )
+            .setImage(teamInfo.data.customization.image)
+            .setTimestamp()
+            .setFooter({
+                text: "Created by @phamishan",
+                iconURL: "https://i.imgur.com/sNTzfld.jpg",
+            });
+
+        // Replying with the embed
+        interaction.editReply({ embeds: [embed] });
     },
 };
