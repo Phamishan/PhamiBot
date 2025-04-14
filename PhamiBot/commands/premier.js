@@ -12,7 +12,8 @@ module.exports = {
                 .setName("input")
                 .setDescription("input to echo back")
                 .setRequired(true)
-        ),
+        )
+        .setDMPermission(true),
     async execute(interaction) {
         await interaction.deferReply();
         // Wait for the users input and store that in const input

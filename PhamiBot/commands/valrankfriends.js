@@ -49,7 +49,8 @@ module.exports = {
                         value: "13094cd6-3723-595e-8ff4-d0d718a4ed68",
                     }
                 )
-        ),
+        )
+        .setDMPermission(true),
     async execute(interaction) {
         await interaction.deferReply();
         const input = await interaction.options.get("input");

@@ -10,7 +10,8 @@ module.exports = {
         .setName("me")
         .setDescription(
             "Finds YOUR Valorant profile (ONLY OG PLACEHOLDER & IN ORTUM)"
-        ),
+        )
+        .setDMPermission(true),
 
     async execute(interaction) {
         await interaction.deferReply();

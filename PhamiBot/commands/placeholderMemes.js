@@ -24,7 +24,8 @@ var pics = [
 module.exports = {
     data: new SlashCommandBuilder()
         .setName("placeholdermeme")
-        .setDescription("Sender et tilfældigt placeholder meme."),
+        .setDescription("Sender et tilfældigt placeholder meme.")
+        .setDMPermission(true),
 
     async execute(interaction) {
         await interaction.reply(pics[Math.floor(Math.random() * pics.length)]);

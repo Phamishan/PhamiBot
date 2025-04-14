@@ -13,7 +13,8 @@ const getBundleImage = require("../controllers/bundleImage.js");
 module.exports = {
     data: new SlashCommandBuilder()
         .setName("bundles")
-        .setDescription("Finds current Valorant bundle(s)"),
+        .setDescription("Finds current Valorant bundle(s)")
+        .setDMPermission(true),
 
     async execute(interaction) {
         await interaction.deferReply();

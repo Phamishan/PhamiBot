@@ -15,7 +15,8 @@ module.exports = {
                 .setName("input")
                 .setDescription("input to echo back")
                 .setRequired(true)
-        ),
+        )
+        .setDMPermission(true),
     async execute(interaction) {
         try {
             await interaction.deferReply(); // Ensure the interaction is deferred
