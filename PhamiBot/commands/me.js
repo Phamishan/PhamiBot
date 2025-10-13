@@ -61,7 +61,7 @@ module.exports = {
             playerTag = userInfo.tag || playerInfo.data.tag;
         } else {
             const errorEmbed = new EmbedBuilder()
-                .setTitle(`FEJL`)
+                .setTitle(`Error`)
                 .setColor(0xff0000)
                 .setDescription("ikke en del af OG placeholder, unlucky");
 
@@ -87,7 +87,7 @@ module.exports = {
 
         if (errorStatus) {
             const errorEmbed = new EmbedBuilder()
-                .setTitle("FEJL")
+                .setTitle("Error")
                 .setColor(0xff0000)
                 .setDescription(errorMessages[errorStatus]);
             return interaction.editReply({ embeds: [errorEmbed] });

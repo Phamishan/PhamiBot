@@ -23,8 +23,8 @@ var pics = [
 
 module.exports = {
     data: new SlashCommandBuilder()
-        .setName("placeholdermeme")
-        .setDescription("Sender et tilfældigt placeholder meme.")
+    .setName("placeholdermeme")
+    .setDescription("Sends a random placeholder meme.")
         .setDMPermission(true),
 
     async execute(interaction) {

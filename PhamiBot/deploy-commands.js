@@ -1,7 +1,7 @@
-require("dotenv").config();
-const fs = require("node:fs");
 const path = require("node:path");
-const { SlashCommandBuilder, Routes } = require("discord.js");
+require("dotenv").config({ path: path.resolve(__dirname, ".env") });
+const fs = require("node:fs");
+const { Routes } = require("discord.js");
 const { REST } = require("@discordjs/rest");
 
 var deployCommandsFunc = function deployCommandsFunc() {

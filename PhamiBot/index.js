@@ -1,4 +1,5 @@
-require("dotenv").config();
+const path = require("node:path");
+require("dotenv").config({ path: path.resolve(__dirname, ".env") });
 const { Client, GatewayIntentBits, EmbedBuilder } = require("discord.js");
 const client = new Client({
     intents: [
@@ -16,7 +17,7 @@ registerEvents(client);
 registerCommands(client);
 
 const welcomeMessage = new EmbedBuilder()
-    .setTitle("Hejsa!")
+    .setTitle("Hi!")
     .setDescription("Server commands:")
     .setColor(0xff0000)
     .addFields(
@@ -26,7 +27,7 @@ const welcomeMessage = new EmbedBuilder()
         },
         {
             name: ":rofl: - ```/placeholdermeme```",
-            value: `Sender et tilfældigt placeholder meme.`,
+            value: `Sends a random placeholder meme.`,
         },
         {
             name: ":scroll: - ```/server```",
@@ -51,6 +52,18 @@ const welcomeMessage = new EmbedBuilder()
         {
             name: ":moneybag: - ```/bundles```",
             value: `Finds current Valorant bundle(s)`,
+        },
+        {
+            name: ":heavy_plus_sign: - ```/addserver```",
+            value: `Add a Minecraft server to the list`,
+        },
+        {
+            name: ":eyes: - ```/checkserver```",
+            value: `Overview of all Minecraft servers`,
+        },
+        {
+            name: ":heavy_minus_sign: - ```/deleteserver```",
+            value: `Remove a saved Minecraft server (PH4M1 ONLY :P)`,
         }
     )
     .setTimestamp()

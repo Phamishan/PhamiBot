@@ -7,7 +7,7 @@
 Overblik over alle commands.
 
 🤣 - /placeholdermeme
-Sender et tilfældigt placeholder meme.
+Sends a random placeholder meme.
 
 📜 - /server
 Server info.
@@ -26,6 +26,15 @@ Finds Premier teams, eg. In Ortum#IO
 
 💰 - /bundles
 Finds current Valorant bundle(s)
+
+➕ - /addserver
+Add a Minecraft server to the list
+
+👀 - /checkserver
+Overview of all Minecraft servers
+
+➖ - /deleteserver
+Remove a saved Minecraft server (PH4M1 ONLY :P)
 ```
 
 ## TODO:
@@ -83,3 +92,6 @@ Finds current Valorant bundle(s)
 -   2.1.2 - 07/04/2025
     -   Updated readme
     -   Optimized code
+-   2.1.3 - 13/10/2025
+    -   Added 3 new commands -/addserver, -/checkserver, -/deleteserver
+    -   Clean up

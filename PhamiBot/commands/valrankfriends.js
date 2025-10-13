@@ -80,7 +80,7 @@ module.exports = {
 
         if (errorStatus) {
             const errorEmbed = new EmbedBuilder()
-                .setTitle("FEJL")
+                .setTitle("Error")
                 .setColor(0xff0000)
                 .setDescription(errorMessages[errorStatus]);
             return interaction.editReply({ embeds: [errorEmbed] });
