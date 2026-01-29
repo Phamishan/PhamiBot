@@ -3,6 +3,8 @@ const {
     EmbedBuilder,
     ActionRowBuilder,
     StringSelectMenuBuilder,
+    InteractionContextType,
+    AttachmentBuilder,
 } = require("discord.js");
 const fs = require("node:fs");
 const path = require("node:path");
@@ -11,12 +13,15 @@ const {
     getUuidForName,
     getCrafatarUrlFromUuid,
 } = require("../utils/minecraft");
-const { AttachmentBuilder } = require("discord.js");
 
 module.exports = {
     data: new SlashCommandBuilder()
         .setName("checkserver")
-        .setDescription("Overview of all Minecraft servers"),
+        .setDescription("Overview of all Minecraft servers")
+        .setContexts(
+            InteractionContextType.Guild,
+            InteractionContextType.BotDM,
+        ),
 
     async execute(interaction) {
         const guild = interaction.guild;
@@ -35,7 +40,7 @@ module.exports = {
             const embed = new EmbedBuilder()
                 .setTitle("No servers")
                 .setDescription(
-                    `There are no saved servers. Add one with /addserver`
+                    `There are no saved servers. Add one with /addserver`,
                 )
                 .setColor(0xff0000)
                 .setTimestamp()
@@ -98,7 +103,7 @@ module.exports = {
             });
 
         const api = `https://api.mcsrvstat.us/2/${encodeURIComponent(
-            server.ip
+            server.ip,
         )}`;
         let json = null;
         try {
@@ -117,7 +122,7 @@ module.exports = {
             } catch (parseErr) {
                 console.error(
                     "Failed to parse JSON from mcsrvstat response:",
-                    parseErr
+                    parseErr,
                 );
                 const snippet = text && text.slice ? text.slice(0, 200) : text;
                 const lower = (snippet || "").toLowerCase();
@@ -190,7 +195,7 @@ module.exports = {
         const fields = players.slice(0, 25).map((p) => ({
             name: p,
             value: `[Avatar](https://crafatar.com/avatars/${encodeURIComponent(
-                p
+                p,
             )}?size=32&overlay=true)`,
             inline: true,
         }));
@@ -203,7 +208,7 @@ module.exports = {
 
         const sample = players.slice(0, 9);
         const uuidPromises = sample.map((name) =>
-            getUuidForName(name).catch(() => null)
+            getUuidForName(name).catch(() => null),
         );
         const resolved = await Promise.all(uuidPromises);
 
@@ -214,7 +219,7 @@ module.exports = {
             const avatarUrl = uuid
                 ? getCrafatarUrlFromUuid(uuid, 64)
                 : `https://crafatar.com/avatars/${encodeURIComponent(
-                      p
+                      p,
                   )}?size=64&overlay=true`;
 
             let appended = false;
@@ -232,13 +237,13 @@ module.exports = {
                     const buffer = Buffer.from(arrayBuffer);
                     const fname = `avatar_${i}.png`;
                     attachments.push(
-                        new AttachmentBuilder(buffer, { name: fname })
+                        new AttachmentBuilder(buffer, { name: fname }),
                     );
                     playerEmbeds.push(
                         new EmbedBuilder()
                             .setTitle(p)
                             .setThumbnail(`attachment://${fname}`)
-                            .setColor(0x0099ff)
+                            .setColor(0x0099ff),
                     );
                     appended = true;
                 }
@@ -251,7 +256,7 @@ module.exports = {
                     new EmbedBuilder()
                         .setTitle(p)
                         .setThumbnail(avatarUrl)
-                        .setColor(0x0099ff)
+                        .setColor(0x0099ff),
                 );
             }
         }
@@ -267,7 +272,7 @@ module.exports = {
         } catch (err) {
             console.error(
                 "Failed to send editReply with attachments, falling back to update without files:",
-                err
+                err,
             );
             return interaction.update({ embeds: allEmbeds, components: [] });
         }

@@ -1,9 +1,17 @@
-const { SlashCommandBuilder, EmbedBuilder } = require("discord.js");
+const {
+    SlashCommandBuilder,
+    EmbedBuilder,
+    InteractionContextType,
+} = require("discord.js");
 
 module.exports = {
     data: new SlashCommandBuilder()
         .setName("commands")
-        .setDescription("Overblik over alle commands"),
+        .setDescription("Overview of all commands")
+        .setContexts(
+            InteractionContextType.Guild,
+            InteractionContextType.BotDM,
+        ),
 
     async execute(interaction) {
         try {
@@ -18,48 +26,48 @@ module.exports = {
                 .addFields(
                     {
                         name: ":robot: - ```/commands```",
-                        value: `Overblik over alle commands.`,
+                        value: "Overview of all commands.",
                     },
                     {
                         name: ":rofl: - ```/placeholdermeme```",
-                        value: `Sends a random placeholder meme.`,
+                        value: "Sends a random placeholder meme.",
                     },
                     {
                         name: ":scroll: - ```/server```",
-                        value: `Server info.`,
+                        value: "Server info.",
                     },
                     {
                         name: ":gun: - ```/valrank```",
-                        value: `Finds Valorant profile, eg. PH4M1#YIN`,
+                        value: "Finds Valorant profile, e.g. PH4M1#YIN",
                     },
                     {
                         name: ":family_man_boy_boy: - ```/valrankfriends```",
-                        value: `Finds Valorant profile (ONLY OG PLACEHOLDER & IN ORTUM)`,
+                        value: "Finds Valorant profile (ONLY OG PLACEHOLDER & IN ORTUM)",
                     },
                     {
                         name: ":index_pointing_at_the_viewer::skin-tone-4:  - ```/me```",
-                        value: `Finds YOUR Valorant profile (ONLY OG PLACEHOLDER & IN ORTUM)`,
+                        value: "Finds YOUR Valorant profile (ONLY OG PLACEHOLDER & IN ORTUM)",
                     },
                     {
                         name: ":family_mmbb: - ```/premierteam```",
-                        value: `Finds Premier teams, eg. In Ortum#IO`,
+                        value: "Finds Premier teams, e.g. In Ortum#IO",
                     },
                     {
                         name: ":moneybag: - ```/bundles```",
-                        value: `Finds current Valorant bundle(s)`,
+                        value: "Finds current Valorant bundle(s)",
                     },
                     {
                         name: ":heavy_plus_sign: - ```/addserver```",
-                        value: `Add a Minecraft server to the list`,
+                        value: "Add a Minecraft server to the list",
                     },
                     {
                         name: ":eyes: - ```/checkserver```",
-                        value: `Overview of all Minecraft servers`,
+                        value: "Overview of all Minecraft servers",
                     },
                     {
                         name: ":heavy_minus_sign: - ```/deleteserver```",
-                        value: `Remove a saved Minecraft server (PH4M1 ONLY :P)`,
-                    }
+                        value: "Remove a saved Minecraft server (PH4M1 ONLY :P)",
+                    },
                 )
                 .setTimestamp()
                 .setFooter({

@@ -1,4 +1,8 @@
-const { SlashCommandBuilder, EmbedBuilder } = require("discord.js");
+const {
+    SlashCommandBuilder,
+    EmbedBuilder,
+    InteractionContextType,
+} = require("discord.js");
 
 const getTeamInfo = require("../controllers/premierTeam.js");
 
@@ -6,16 +10,18 @@ const getTeamInfo = require("../controllers/premierTeam.js");
 module.exports = {
     data: new SlashCommandBuilder()
         .setName("premierteam")
-        .setDescription("Finds Premier teams, eg. In Ortum#IO")
+        .setDescription("Finds Premier teams, e.g. In Ortum#IO")
         .addStringOption((option) =>
             option
                 .setName("input")
                 .setDescription("input to echo back")
-                .setRequired(true)
+                .setRequired(true),
         )
-        .setDMPermission(true),
+        .setContexts(
+            InteractionContextType.Guild,
+            InteractionContextType.BotDM,
+        ),
     async execute(interaction) {
-        await interaction.deferReply();
         // Wait for the users input and store that in const input
         const input = await interaction.options.get("input");
 
@@ -36,7 +42,7 @@ module.exports = {
         };
 
         const errorStatus = [teamInfo.status].find(
-            (status) => errorMessages[status]
+            (status) => errorMessages[status],
         );
 
         if (errorStatus) {
@@ -81,7 +87,7 @@ module.exports = {
             .setTitle(
                 `:crown: ${teamInfo.data.name}` +
                     "#" +
-                    `${teamInfo.data.tag} :crown:`
+                    `${teamInfo.data.tag} :crown:`,
             )
             .setColor(0xff0000)
             .addFields(
@@ -107,10 +113,10 @@ module.exports = {
                     name: "Division:",
                     value: `${divsionRank}`,
                     inline: true,
-                }
+                },
             )
             .setThumbnail(
-                "https://pbs.twimg.com/media/FuRiZUuWIAYxAJ3?format=png&name=small"
+                "https://pbs.twimg.com/media/FuRiZUuWIAYxAJ3?format=png&name=small",
             )
             .setImage(teamInfo.data.customization.image)
             .setTimestamp()

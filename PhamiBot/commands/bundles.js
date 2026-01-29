@@ -4,6 +4,7 @@ const {
     ButtonBuilder,
     ButtonStyle,
     ActionRowBuilder,
+    InteractionContextType,
 } = require("discord.js");
 
 const getBundles = require("../controllers/bundles.js");
@@ -14,7 +15,10 @@ module.exports = {
     data: new SlashCommandBuilder()
         .setName("bundles")
         .setDescription("Finds current Valorant bundle(s)")
-        .setDMPermission(true),
+        .setContexts(
+            InteractionContextType.Guild,
+            InteractionContextType.BotDM,
+        ),
 
     async execute(interaction) {
         await interaction.deferReply();
@@ -22,82 +26,130 @@ module.exports = {
         const bundles = await getBundles();
         const bundleImage = await getBundleImage();
 
-        const bundleUUID = bundles.data[0].bundle_uuid;
+        // Create embeds for all bundles
+        const bundleEmbeds = [];
+        const bundleData = []; // Store bundle data for button handling
 
-        for (let i = 0; i < bundleImage.data.length; i++) {
-            if (bundleImage.data[i].uuid === bundleUUID) {
-                // Creating the embed
-                const fullBundle = new EmbedBuilder()
-                    .setTitle(
-                        `:information_source: ${bundleImage.data[i].displayName} | ${bundles.data[0].bundle_price} VP :information_source:`
-                    )
-                    .setColor(0xff0000)
-                    .setImage(`${bundleImage.data[i].displayIcon}`)
-                    .setTimestamp()
-                    .setFooter({
-                        text: "Created by @phamishan",
-                        iconURL: "https://i.imgur.com/sNTzfld.jpg",
-                    });
+        for (
+            let bundleIndex = 0;
+            bundleIndex < bundles.data.length;
+            bundleIndex++
+        ) {
+            const bundleUUID = bundles.data[bundleIndex].bundle_uuid;
 
-                const itemsInBundle = [];
-
-                for (let i = 0; i < bundles.data[0].items.length; i++) {
-                    if (bundles.data[0].items[i].image == null) {
-                        continue;
-                    }
-
-                    const item = new EmbedBuilder()
+            for (let i = 0; i < bundleImage.data.length; i++) {
+                if (bundleImage.data[i].uuid === bundleUUID) {
+                    // Creating the embed
+                    const fullBundle = new EmbedBuilder()
                         .setTitle(
-                            `:moneybag: ${bundles.data[0].items[i].name} | ${bundles.data[0].items[i].base_price} VP :moneybag:`
+                            `:information_source: ${bundleImage.data[i].displayName} | ${bundles.data[bundleIndex].bundle_price} VP :information_source:`,
                         )
                         .setColor(0xff0000)
-                        .setImage(`${bundles.data[0].items[i].image}`)
+                        .setImage(`${bundleImage.data[i].displayIcon}`)
                         .setTimestamp()
                         .setFooter({
                             text: "Created by @phamishan",
                             iconURL: "https://i.imgur.com/sNTzfld.jpg",
                         });
 
-                    itemsInBundle.push(item);
-                }
+                    bundleEmbeds.push(fullBundle);
 
-                const viewFullBundle = new ButtonBuilder()
-                    .setCustomId("viewFullBundle")
-                    .setLabel("View full bundle")
-                    .setStyle(ButtonStyle.Primary);
+                    // Store items for this bundle
+                    const itemsInBundle = [];
 
-                const row = new ActionRowBuilder().addComponents(
-                    viewFullBundle
-                );
+                    for (
+                        let j = 0;
+                        j < bundles.data[bundleIndex].items.length;
+                        j++
+                    ) {
+                        if (bundles.data[bundleIndex].items[j].image == null) {
+                            continue;
+                        }
 
-                // Replying with the embed
-                const response = await interaction.editReply({
-                    embeds: [fullBundle],
-                    components: [row],
-                });
+                        const item = new EmbedBuilder()
+                            .setTitle(
+                                `:moneybag: ${bundles.data[bundleIndex].items[j].name} | ${bundles.data[bundleIndex].items[j].base_price} VP :moneybag:`,
+                            )
+                            .setColor(0xff0000)
+                            .setImage(
+                                `${bundles.data[bundleIndex].items[j].image}`,
+                            )
+                            .setTimestamp()
+                            .setFooter({
+                                text: "Created by @phamishan",
+                                iconURL: "https://i.imgur.com/sNTzfld.jpg",
+                            });
 
-                const collectorFilter = (i) =>
-                    i.user.id === interaction.user.id;
-                try {
-                    const confirmation = await response.awaitMessageComponent({
-                        filter: collectorFilter,
-                        time: 60_000,
-                    });
-
-                    if (confirmation.customId === "viewFullBundle") {
-                        await confirmation.update({
-                            embeds: itemsInBundle,
-                            components: [],
-                        });
+                        itemsInBundle.push(item);
                     }
-                } catch (e) {
-                    await interaction.editReply({
-                        content:
-                            "Confirmation not received within 1 minute, cancelling",
-                        components: [],
+
+                    // Add bundle price to items embeds
+                    const priceEmbed = new EmbedBuilder()
+                        .setTitle(
+                            `:information_source: Bundle Price :information_source:`,
+                        )
+                        .setDescription(
+                            `**${bundles.data[bundleIndex].bundle_price} VP**`,
+                        )
+                        .setColor(0xff0000)
+                        .setTimestamp()
+                        .setFooter({
+                            text: "Created by @phamishan",
+                            iconURL: "https://i.imgur.com/sNTzfld.jpg",
+                        });
+
+                    const itemsWithPrice = [priceEmbed, ...itemsInBundle];
+
+                    bundleData.push({
+                        bundleEmbed: fullBundle,
+                        items: itemsWithPrice,
                     });
+
+                    break;
                 }
             }
+        }
+
+        // Create buttons for each bundle
+        const buttons = [];
+        for (let i = 0; i < bundleData.length; i++) {
+            buttons.push(
+                new ButtonBuilder()
+                    .setCustomId(`viewBundle_${i}`)
+                    .setLabel(`Bundle ${i + 1}`)
+                    .setStyle(ButtonStyle.Primary),
+            );
+        }
+
+        const row = new ActionRowBuilder().addComponents(buttons);
+
+        // Replying with the embeds
+        const response = await interaction.editReply({
+            embeds: bundleEmbeds,
+            components: [row],
+        });
+
+        const collectorFilter = (i) => i.user.id === interaction.user.id;
+        try {
+            const confirmation = await response.awaitMessageComponent({
+                filter: collectorFilter,
+                time: 60_000,
+            });
+
+            const customId = confirmation.customId;
+            if (customId.startsWith("viewBundle_")) {
+                const bundleIndex = parseInt(customId.split("_")[1]);
+                await confirmation.update({
+                    embeds: bundleData[bundleIndex].items,
+                    components: [],
+                });
+            }
+        } catch (e) {
+            await interaction.editReply({
+                content:
+                    "Confirmation not received within 1 minute, cancelling",
+                components: [],
+            });
         }
     },
 };

@@ -1,9 +1,8 @@
-const { SlashCommandBuilder } = require("discord.js");
+const { SlashCommandBuilder, InteractionContextType } = require("discord.js");
 
 const filePath = "PhamiBot/pics/placeholderMemes/";
 
 var pics = [
-    { files: [filePath + "cloudvjula.png"] },
     { files: [filePath + "gameExpoPhamiAndPatrick.png"] },
     { files: [filePath + "gameExpoPhamiAndPatrick2.png"] },
     { files: [filePath + "lauesimba.jpg"] },
@@ -19,13 +18,24 @@ var pics = [
     { files: [filePath + "phamiWIFI2.jpg"] },
     { files: [filePath + "ripRapRup.png"] },
     { files: [filePath + "ripRapRup2.png"] },
+    { files: [filePath + "laueimage.png"] },
+    { files: [filePath + "laueSamePicture.png"] },
+    { files: [filePath + "patXben.png"] },
+    { files: [filePath + "phamiGif.png"] },
+    { files: [filePath + "phamiJokerKun.png"] },
+    { files: [filePath + "phamitownhallmeme.png"] },
+    { files: [filePath + "phamiXjacobRoblox.png"] },
+    { files: [filePath + "prayGaming.png"] },
 ];
 
 module.exports = {
     data: new SlashCommandBuilder()
-    .setName("placeholdermeme")
-    .setDescription("Sends a random placeholder meme.")
-        .setDMPermission(true),
+        .setName("placeholdermeme")
+        .setDescription("Sends a random placeholder meme.")
+        .setContexts(
+            InteractionContextType.Guild,
+            InteractionContextType.BotDM,
+        ),
 
     async execute(interaction) {
         await interaction.reply(pics[Math.floor(Math.random() * pics.length)]);

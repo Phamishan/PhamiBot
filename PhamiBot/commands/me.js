@@ -1,4 +1,8 @@
-const { SlashCommandBuilder, EmbedBuilder } = require("discord.js");
+const {
+    SlashCommandBuilder,
+    EmbedBuilder,
+    InteractionContextType,
+} = require("discord.js");
 
 const getPlayerRank = require("../controllers/playerRank.js");
 const getPlayerInfoByPUUID = require("../controllers/playerInfoByPUUID.js");
@@ -9,13 +13,14 @@ module.exports = {
     data: new SlashCommandBuilder()
         .setName("me")
         .setDescription(
-            "Finds YOUR Valorant profile (ONLY OG PLACEHOLDER & IN ORTUM)"
+            "Finds YOUR Valorant profile (ONLY OG PLACEHOLDER & IN ORTUM)",
         )
-        .setDMPermission(true),
+        .setContexts(
+            InteractionContextType.Guild,
+            InteractionContextType.BotDM,
+        ),
 
     async execute(interaction) {
-        await interaction.deferReply();
-
         let puuid = "796c8a28-4293-5bbf-9183-5d95cdce243a";
         let playerName = "";
         let playerTag = "";
@@ -43,9 +48,9 @@ module.exports = {
             "889501948410232842": {
                 puuid: "dcf5e34a-5d74-552b-bdeb-e97e3cbb7b80",
             }, // Lucas
-            "469139107025780738": {
-                puuid: "045af984-6086-5bcf-b18a-20fe69193639",
-            }, // Anna
+            "1029255296301924383": {
+                puuid: "61173b3a-036b-5fcc-9184-30510d44ba13",
+            }, // Leileii
             "763469137351540767": {
                 puuid: "9aee3e0d-1bd1-5ece-9fed-c6843e11282a",
             }, // Benjamin
@@ -82,7 +87,7 @@ module.exports = {
         };
 
         const errorStatus = [playerRank.status, playerInfo.status].find(
-            (status) => errorMessages[status]
+            (status) => errorMessages[status],
         );
 
         if (errorStatus) {
@@ -97,7 +102,7 @@ module.exports = {
             .setTitle(
                 `:crown: ${playerInfo.data.name}` +
                     "#" +
-                    `${playerInfo.data.tag} :crown:`
+                    `${playerInfo.data.tag} :crown:`,
             )
             .setColor(0xff0000)
             .addFields(
@@ -120,7 +125,7 @@ module.exports = {
                     name: "Last 5 ranked games:",
                     value: `${playerMatches}`,
                     inline: false,
-                }
+                },
             )
             .setImage(`${playerInfo.data.card.wide}`)
             .setThumbnail(`${playerRank.data.current_data.images.small}`)

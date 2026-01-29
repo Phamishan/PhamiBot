@@ -1,4 +1,8 @@
-const { SlashCommandBuilder, EmbedBuilder } = require("discord.js");
+const {
+    SlashCommandBuilder,
+    EmbedBuilder,
+    InteractionContextType,
+} = require("discord.js");
 
 const getPlayerRank = require("../controllers/playerRank.js");
 const getPlayerInfoByPUUID = require("../controllers/playerInfoByPUUID.js");
@@ -12,7 +16,7 @@ module.exports = {
     data: new SlashCommandBuilder()
         .setName("valrankfriends")
         .setDescription(
-            "Finds Valorant profile (ONLY OG PLACEHOLDER & IN ORTUM)"
+            "Finds Valorant profile (ONLY OG PLACEHOLDER & IN ORTUM)",
         )
         .addStringOption((option) =>
             option
@@ -47,10 +51,13 @@ module.exports = {
                     {
                         name: "PRAY2SLAY",
                         value: "13094cd6-3723-595e-8ff4-d0d718a4ed68",
-                    }
-                )
+                    },
+                ),
         )
-        .setDMPermission(true),
+        .setContexts(
+            InteractionContextType.Guild,
+            InteractionContextType.BotDM,
+        ),
     async execute(interaction) {
         await interaction.deferReply();
         const input = await interaction.options.get("input");
@@ -75,7 +82,7 @@ module.exports = {
         };
 
         const errorStatus = [playerRank.status, playerInfo.status].find(
-            (status) => errorMessages[status]
+            (status) => errorMessages[status],
         );
 
         if (errorStatus) {
@@ -90,7 +97,7 @@ module.exports = {
             .setTitle(
                 `:crown: ${playerInfo.data.name}` +
                     "#" +
-                    `${playerInfo.data.tag} :crown:`
+                    `${playerInfo.data.tag} :crown:`,
             )
             .setColor(0xff0000)
             .addFields(
@@ -113,7 +120,7 @@ module.exports = {
                     name: "Last 5 ranked games:",
                     value: `${playerMatches}`,
                     inline: false,
-                }
+                },
             )
             .setImage(`${playerInfo.data.card.wide}`)
             .setThumbnail(`${playerRank.data.current_data.images.small}`)

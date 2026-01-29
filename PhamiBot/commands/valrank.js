@@ -1,4 +1,8 @@
-const { SlashCommandBuilder, EmbedBuilder } = require("discord.js");
+const {
+    SlashCommandBuilder,
+    EmbedBuilder,
+    InteractionContextType,
+} = require("discord.js");
 
 const getPlayerRank = require("../controllers/playerRank.js");
 const getPlayerInfo = require("../controllers/playerInfo.js");
@@ -9,14 +13,17 @@ const getPlayerCard = require("../controllers/playerCard.js");
 module.exports = {
     data: new SlashCommandBuilder()
         .setName("valrank")
-        .setDescription("Finds Valorant profile, eg. PH4M1#YIN")
+        .setDescription("Finds Valorant profile, e.g. PH4M1#YIN")
         .addStringOption((option) =>
             option
                 .setName("input")
                 .setDescription("input to echo back")
-                .setRequired(true)
+                .setRequired(true),
         )
-        .setDMPermission(true),
+        .setContexts(
+            InteractionContextType.Guild,
+            InteractionContextType.BotDM,
+        ),
     async execute(interaction) {
         try {
             await interaction.deferReply(); // Ensure the interaction is deferred
@@ -31,7 +38,7 @@ module.exports = {
             const playerInfo = await getPlayerInfo(playerName, playerTag);
             const playerMatches = await getLastFiveMatches(
                 playerName,
-                playerTag
+                playerTag,
             );
             const playerCard = await getPlayerCard(playerInfo.data.card);
 
@@ -61,7 +68,7 @@ module.exports = {
             // Create the embed for successful response
             const embed = new EmbedBuilder()
                 .setTitle(
-                    `:crown: ${playerInfo.data.name}#${playerInfo.data.tag} :crown:`
+                    `:crown: ${playerInfo.data.name}#${playerInfo.data.tag} :crown:`,
                 )
                 .setColor(0xff0000)
                 .addFields(
@@ -84,7 +91,7 @@ module.exports = {
                         name: "Last 5 ranked games:",
                         value: `${playerMatches}`,
                         inline: false,
-                    }
+                    },
                 )
                 .setImage(`${playerCard.data.wideArt}`)
                 .setThumbnail(`${playerRank.data.current_data.images.small}`)
@@ -99,11 +106,11 @@ module.exports = {
             console.error(error);
             if (interaction.replied || interaction.deferred) {
                 await interaction.followUp(
-                    "An error occurred while processing your request."
+                    "An error occurred while processing your request.",
                 );
             } else {
                 await interaction.reply(
-                    "An error occurred while processing your request."
+                    "An error occurred while processing your request.",
                 );
             }
         }
