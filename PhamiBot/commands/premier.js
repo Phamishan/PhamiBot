@@ -20,6 +20,7 @@ module.exports = {
         .setContexts(
             InteractionContextType.Guild,
             InteractionContextType.BotDM,
+            InteractionContextType.PrivateChannel,
         ),
     async execute(interaction) {
         // Wait for the users input and store that in const input

@@ -11,6 +11,7 @@ module.exports = {
         .setContexts(
             InteractionContextType.Guild,
             InteractionContextType.BotDM,
+            InteractionContextType.PrivateChannel,
         ),
 
     async execute(interaction) {
