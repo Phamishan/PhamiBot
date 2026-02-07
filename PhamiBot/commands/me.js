@@ -22,6 +22,8 @@ module.exports = {
         ),
 
     async execute(interaction) {
+        await interaction.deferReply();
+
         let puuid = "796c8a28-4293-5bbf-9183-5d95cdce243a";
         let playerName = "";
         let playerTag = "";

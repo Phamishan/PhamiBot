@@ -23,7 +23,8 @@ module.exports = {
             InteractionContextType.PrivateChannel,
         ),
     async execute(interaction) {
-        // Wait for the users input and store that in const input
+        await interaction.deferReply();
+
         const input = await interaction.options.get("input");
 
         const premierNameAndTag = input.value.split("#");

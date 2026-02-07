@@ -103,3 +103,6 @@ Remove a saved Minecraft server (PH4M1 ONLY :P)
     - Updated -/commands
 - 2.1.5 - 30/01/2026
     - Enabled Group DMs
+- 2.1.6 - 07/02/2026
+    - Fixed -/me
+    - Fixed -/premierteam
