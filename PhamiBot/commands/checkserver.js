@@ -193,14 +193,6 @@ module.exports = {
             });
         }
 
-        const fields = players.slice(0, 25).map((p) => ({
-            name: p,
-            value: `[Avatar](https://crafatar.com/avatars/${encodeURIComponent(
-                p,
-            )}?size=32&overlay=true)`,
-            inline: true,
-        }));
-
         const mainEmbed = new EmbedBuilder()
             .setTitle(`Players online on ${server.name}:`)
             .setDescription(server.ip)
@@ -219,7 +211,7 @@ module.exports = {
             const uuid = resolved[i];
             const avatarUrl = uuid
                 ? getCrafatarUrlFromUuid(uuid, 64)
-                : `https://crafatar.com/avatars/${encodeURIComponent(
+                : `https://crafatar.lundhahn.dk/avatars/${encodeURIComponent(
                       p,
                   )}?size=64&overlay=true`;
 

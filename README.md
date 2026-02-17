@@ -106,3 +106,5 @@ Remove a saved Minecraft server (PH4M1 ONLY :P)
 - 2.1.6 - 07/02/2026
     - Fixed -/me
     - Fixed -/premierteam
+- 2.1.7 - 17/02/2026
+    - Fixed -/checkserver

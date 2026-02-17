@@ -28,7 +28,7 @@ async function getUuidForName(username) {
     if (cache[key]) return cache[key];
 
     const api = `https://api.mojang.com/users/profiles/minecraft/${encodeURIComponent(
-        username
+        username,
     )}`;
     try {
         const res = await request(api, {
@@ -53,7 +53,7 @@ async function getUuidForName(username) {
 }
 
 function getCrafatarUrlFromUuid(uuid, size = 64) {
-    return `https://crafatar.com/avatars/${uuid}?size=${size}&overlay=true`;
+    return `https://crafatar.lundhahn.dk/avatars/${uuid}?size=${size}&overlay=true`;
 }
 
 async function composeAvatarsGrid(uuids, size = 64, cols = 3) {
@@ -66,7 +66,7 @@ async function composeAvatarsGrid(uuids, size = 64, cols = 3) {
             } catch (e) {
                 return new Jimp(size, size, 0x000000ff);
             }
-        })
+        }),
     );
 
     const rows = Math.ceil(avatars.length / cols);
