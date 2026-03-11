@@ -7,11 +7,11 @@ module.exports = {
         client.user.setPresence({
             activities: [
                 {
-                    name: "PlaceHoldia",
-                    type: ActivityType.Watching,
+                    type: ActivityType.Custom,
+                    name: "custom",
+                    state: "✨ /commands ✨",
                 },
             ],
-            status: "online",
         });
         console.log(`Client ready! Logged in as ${client.user.tag}.`);
     },

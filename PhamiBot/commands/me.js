@@ -13,7 +13,7 @@ module.exports = {
     data: new SlashCommandBuilder()
         .setName("me")
         .setDescription(
-            "Finds YOUR Valorant profile (ONLY OG PLACEHOLDER & IN ORTUM)",
+            "Finds YOUR VALORANT profile (ONLY OG PLACEHOLDER & IN ORTUM)",
         )
         .setContexts(
             InteractionContextType.Guild,

@@ -16,12 +16,12 @@ module.exports = {
     data: new SlashCommandBuilder()
         .setName("valrankfriends")
         .setDescription(
-            "Finds Valorant profile (ONLY OG PLACEHOLDER & IN ORTUM)",
+            "Finds VALORANT profile (ONLY OG PLACEHOLDER & IN ORTUM)",
         )
         .addStringOption((option) =>
             option
                 .setName("input")
-                .setDescription("input to echo back")
+                .setDescription("Choose one from the list")
                 .setRequired(true)
                 .addChoices(
                     {

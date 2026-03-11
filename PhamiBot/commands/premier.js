@@ -14,7 +14,7 @@ module.exports = {
         .addStringOption((option) =>
             option
                 .setName("input")
-                .setDescription("input to echo back")
+                .setDescription("Enter the team name")
                 .setRequired(true),
         )
         .setContexts(

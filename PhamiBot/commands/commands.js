@@ -39,15 +39,15 @@ module.exports = {
                     },
                     {
                         name: ":gun: - ```/valrank```",
-                        value: "Finds Valorant profile, e.g. PH4M1#YIN",
+                        value: "Finds VALORANT profile, e.g. PH4M1#IOM",
                     },
                     {
                         name: ":family_man_boy_boy: - ```/valrankfriends```",
-                        value: "Finds Valorant profile (ONLY OG PLACEHOLDER & IN ORTUM)",
+                        value: "Finds VALORANT profile (ONLY OG PLACEHOLDER & IN ORTUM)",
                     },
                     {
                         name: ":index_pointing_at_the_viewer::skin-tone-4:  - ```/me```",
-                        value: "Finds YOUR Valorant profile (ONLY OG PLACEHOLDER & IN ORTUM)",
+                        value: "Finds YOUR VALORANT profile (ONLY OG PLACEHOLDER & IN ORTUM)",
                     },
                     {
                         name: ":family_mmbb: - ```/premierteam```",
@@ -55,7 +55,11 @@ module.exports = {
                     },
                     {
                         name: ":moneybag: - ```/bundles```",
-                        value: "Finds current Valorant bundle(s)",
+                        value: "Finds current VALORANT bundle(s)",
+                    },
+                    {
+                        name: ":calendar: - ```/season```",
+                        value: "Shows the current VALORANT episode and act",
                     },
                     {
                         name: ":heavy_plus_sign: - ```/addserver```",
@@ -68,6 +72,18 @@ module.exports = {
                     {
                         name: ":heavy_minus_sign: - ```/deleteserver```",
                         value: "Remove a saved Minecraft server (PH4M1 ONLY :P)",
+                    },
+                    {
+                        name: ":parachute: - ```/apexrank```",
+                        value: "Finds Apex Legends profile, e.g. PH4M1 (ENTER EA ACCOUNT NAME)",
+                    },
+                    {
+                        name: ":family_man_boy_boy: - ```/apexrankfriends```",
+                        value: "Finds Apex Legends profile (ONLY PRIMEHOLDERS+)",
+                    },
+                    {
+                        name: ":map: - ```/maprotation```",
+                        value: "Finds the current and next map [RANKED] (Apex Legends)",
                     },
                 )
                 .setTimestamp()

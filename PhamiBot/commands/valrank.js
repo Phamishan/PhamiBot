@@ -13,11 +13,11 @@ const getPlayerCard = require("../controllers/playerCard.js");
 module.exports = {
     data: new SlashCommandBuilder()
         .setName("valrank")
-        .setDescription("Finds Valorant profile, e.g. PH4M1#YIN")
+        .setDescription("Finds VALORANT profile, e.g. PH4M1#IOM")
         .addStringOption((option) =>
             option
                 .setName("input")
-                .setDescription("input to echo back")
+                .setDescription("Enter the player's name")
                 .setRequired(true),
         )
         .setContexts(

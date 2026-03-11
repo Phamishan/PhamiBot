@@ -13,19 +13,22 @@ Sends a random placeholder meme.
 Server info.
 
 🔫 - /valrank
-Finds Valorant profile, e.g. PH4M1#YIN
+Finds VALORANT profile, e.g. PH4M1#IOM
 
 👨‍👦‍👦 - /valrankfriends
-Finds Valorant profile (ONLY OG PLACEHOLDER & IN ORTUM)
+Finds VALORANT profile (ONLY OG PLACEHOLDER & IN ORTUM)
 
 🫵🏾 - /me
-Finds YOUR Valorant profile (ONLY OG PLACEHOLDER & IN ORTUM)
+Finds YOUR VALORANT profile (ONLY OG PLACEHOLDER & IN ORTUM)
 
 👨‍👨‍👦‍👦 - /premierteam
 Finds Premier teams, e.g. In Ortum#IO
 
 💰 - /bundles
-Finds current Valorant bundle(s)
+Finds current VALORANT bundle(s)
+
+📅 - /season
+Shows the current VALORANT episode and act
 
 ➕ - /addserver
 Add a Minecraft server to the list
@@ -35,11 +38,22 @@ Overview of all Minecraft servers
 
 ➖ - /deleteserver
 Remove a saved Minecraft server (PH4M1 ONLY :P)
+
+🪂 - /apexrank
+Finds Apex Legends profile, e.g. PH4M1 (ENTER EA ACCOUNT NAME)
+
+👨‍👦‍👦 - /apexrankfriends
+Finds Apex Legends profile (ONLY PRIMEHOLDERS+)
+
+🗺️ - /maprotation
+Finds the current and next map [RANKED] (Apex Legends)
+
 ```
 
 ## TODO:
 
 - match history command
+- /valleaderboard :eyes:
 
 ## Version History
 
@@ -110,3 +124,13 @@ Remove a saved Minecraft server (PH4M1 ONLY :P)
     - Fixed -/checkserver
 - 2.1.8 - 21/02/2025
     - Updated -/checkserver
+- 2.1.9 - 11/03/2025
+    - Added 4 new commands -/apexrank, -/apexrankfriends, -/maprotation, /season
+    - Updated join message
+    - Updated -/bundles
+    - Updated -/commands
+    - Updated -/me
+    - Updated -/premierteam
+    - Updated -/valrank
+    - Updated -/valrankfriends
+    - New bot status
