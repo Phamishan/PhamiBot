@@ -186,10 +186,13 @@ async function processSingleServer(interaction, server) {
         });
     }
 
-    const players = json.players && json.players.list ? json.players.list : [];
+    const playersInfo = json.players || {};
+    const players = Array.isArray(playersInfo.list) ? playersInfo.list : [];
+    const onlineCount = Number(playersInfo.online || 0);
+    const maxCount = Number(playersInfo.max || 0);
 
     const attachments = [];
-    if (players.length === 0) {
+    if (onlineCount === 0 && players.length === 0) {
         return interaction.reply({
             content: `No players online on **${server.name}** (${server.ip}).`,
             components: [],
@@ -199,9 +202,23 @@ async function processSingleServer(interaction, server) {
 
     const mainEmbed = new EmbedBuilder()
         .setTitle(`Players online on ${server.name}:`)
-        .setDescription(server.ip)
+        .setDescription(
+            maxCount > 0
+                ? `${server.ip}\nOnline: **${onlineCount}/${maxCount}**`
+                : `${server.ip}\nOnline: **${onlineCount}**`,
+        )
         .setColor(0x00ff00)
         .setTimestamp();
+
+    // Many large servers expose player counts but hide the public player list.
+    if (players.length === 0 && onlineCount > 0) {
+        return interaction.reply({
+            embeds: [mainEmbed],
+            content:
+                "This server does not expose a public player list via the status API.",
+            components: [],
+        });
+    }
 
     const sample = players.slice(0, 9);
     const uuidPromises = sample.map((name) =>
