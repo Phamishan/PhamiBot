@@ -134,3 +134,7 @@ Finds the current and next map [RANKED] (Apex Legends)
     - Updated -/valrank
     - Updated -/valrankfriends
     - New bot status
+- 2.2.0 - 14/03/2026
+    - Updated -/checkserver
+- 2.2.1 - 23/03/2026
+    - Updated -/checkserver

@@ -112,6 +112,16 @@ module.exports = {
     },
 };
 
+function escapeDiscordFormatting(text) {
+    return text
+        .replace(/\\/g, "\\\\")
+        .replace(/\*/g, "\\*")
+        .replace(/_/g, "\\_")
+        .replace(/~/g, "\\~")
+        .replace(/`/g, "\\`")
+        .replace(/\|/g, "\\|");
+}
+
 async function processSingleServer(interaction, server) {
     const api = `https://api.mcsrvstat.us/2/${encodeURIComponent(server.ip)}`;
     let json = null;
@@ -255,7 +265,7 @@ async function processSingleServer(interaction, server) {
                 );
                 playerEmbeds.push(
                     new EmbedBuilder()
-                        .setTitle(p)
+                        .setTitle(escapeDiscordFormatting(p))
                         .setThumbnail(`attachment://${fname}`)
                         .setColor(0x0099ff),
                 );
@@ -268,7 +278,7 @@ async function processSingleServer(interaction, server) {
         if (!appended) {
             playerEmbeds.push(
                 new EmbedBuilder()
-                    .setTitle(p)
+                    .setTitle(escapeDiscordFormatting(p))
                     .setThumbnail(avatarUrl)
                     .setColor(0x0099ff),
             );
