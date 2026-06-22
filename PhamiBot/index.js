@@ -58,6 +58,14 @@ const welcomeMessage = new EmbedBuilder()
             value: "Shows the current VALORANT episode and act",
         },
         {
+            name: ":bar_chart: - ```/valleaderboard```",
+            value: "Ranks multiple VALORANT players from provided UUIDs",
+        },
+        {
+            name: ":crossed_swords: - ```/matches```",
+            value: "View last 10 competitive VALORANT matches",
+        },           
+        {
             name: ":heavy_plus_sign: - ```/addserver```",
             value: "Add a Minecraft server to the list",
         },

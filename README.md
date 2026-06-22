@@ -30,6 +30,9 @@ Finds current VALORANT bundle(s)
 📅 - /season
 Shows the current VALORANT episode and act
 
+📊 - /valleaderboard
+Ranks multiple VALORANT players from provided UUIDs
+
 ➕ - /addserver
 Add a Minecraft server to the list
 
@@ -53,7 +56,6 @@ Finds the current and next map [RANKED] (Apex Legends)
 ## TODO:
 
 - match history command
-- /valleaderboard :eyes:
 
 ## Version History
 
@@ -138,3 +140,8 @@ Finds the current and next map [RANKED] (Apex Legends)
     - Updated -/checkserver
 - 2.2.1 - 23/03/2026
     - Updated -/checkserver
+- 2.2.2 - x
+    - Added new command -/valleaderboard
+    - Updated -/commands
+    - Updated join message
+    - Updated readme
