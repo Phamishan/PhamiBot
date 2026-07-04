@@ -53,6 +53,10 @@ module.exports = {
                         name: "Z1LVER",
                         value: "1009143499944-PC",
                     },
+                    {
+                        name: "SWEETPOISON",
+                        value: "2510156661-PC",
+                    }
                 ),
         )
         .setContexts(

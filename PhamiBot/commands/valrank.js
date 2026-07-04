@@ -13,7 +13,7 @@ const getPlayerCard = require("../controllers/playerCard.js");
 module.exports = {
     data: new SlashCommandBuilder()
         .setName("valrank")
-        .setDescription("Finds VALORANT profile, e.g. PH4M1#IOM")
+        .setDescription("Finds VALORANT profile, e.g. PH4M1#SH4N")
         .addStringOption((option) =>
             option
                 .setName("input")

@@ -13,7 +13,7 @@ Sends a random placeholder meme.
 Server info.
 
 🔫 - /valrank
-Finds VALORANT profile, e.g. PH4M1#IOM
+Finds VALORANT profile, e.g. PH4M1#SH4N
 
 👨‍👦‍👦 - /valrankfriends
 Finds VALORANT profile (ONLY OG PLACEHOLDER & IN ORTUM)
@@ -138,3 +138,8 @@ Finds the current and next map [RANKED] (Apex Legends)
     - Updated -/checkserver
 - 2.2.1 - 23/03/2026
     - Updated -/checkserver
+- 2.2.2 - 04/07/2026
+    - Updated join message
+    - Updated -/commands
+    - Updated -/valrank
+    - Updated -/apexrankfriends

@@ -35,7 +35,7 @@ const welcomeMessage = new EmbedBuilder()
         },
         {
             name: ":gun: - ```/valrank```",
-            value: "Finds VALORANT profile, e.g. PH4M1#IOM",
+            value: "Finds VALORANT profile, e.g. PH4M1#SH4N",
         },
         {
             name: ":family_man_boy_boy: - ```/valrankfriends```",
