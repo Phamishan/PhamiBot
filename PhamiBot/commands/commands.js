@@ -43,15 +43,15 @@ module.exports = {
                     },
                     {
                         name: ":family_man_boy_boy: - ```/valrankfriends```",
-                        value: "Finds VALORANT profile (ONLY OG PLACEHOLDER & IN ORTUM)",
+                        value: "Finds VALORANT profile (ONLY OG PLACEHOLDER & PREMIUMHOLDERS)",
                     },
                     {
                         name: ":index_pointing_at_the_viewer::skin-tone-4:  - ```/me```",
-                        value: "Finds YOUR VALORANT profile (ONLY OG PLACEHOLDER & IN ORTUM)",
+                        value: "Finds YOUR VALORANT profile (ONLY OG PLACEHOLDER & PREMIUMHOLDERS)",
                     },
                     {
                         name: ":family_mmbb: - ```/premierteam```",
-                        value: "Finds Premier teams, e.g. In Ortum#IO",
+                        value: "Finds Premier teams, e.g. PlaceHoldia#PLH",
                     },
                     {
                         name: ":moneybag: - ```/bundles```",
@@ -79,7 +79,7 @@ module.exports = {
                     },
                     {
                         name: ":family_man_boy_boy: - ```/apexrankfriends```",
-                        value: "Finds Apex Legends profile (ONLY PRIMEHOLDERS+)",
+                        value: "Finds Apex Legends profile (ONLY OG PLACEHOLDER & PREMIUMHOLDERS)",
                     },
                     {
                         name: ":map: - ```/maprotation```",

@@ -10,7 +10,9 @@ const { getApexStatsUUID } = require("../controllers/apexStats.js");
 module.exports = {
     data: new SlashCommandBuilder()
         .setName("apexrankfriends")
-        .setDescription("Finds Apex Legends profile (ONLY PRIMEHOLDERS+)")
+        .setDescription(
+            "Finds Apex Legends profile (ONLY OG PLACEHOLDER & PREMIUMHOLDERS)",
+        )
         .addStringOption((option) =>
             option
                 .setName("input")
@@ -18,45 +20,37 @@ module.exports = {
                 .setRequired(true)
                 .addChoices(
                     {
-                        name: "PH4M1",
-                        value: "1001040582944-PC",
-                    },
-                    {
-                        name: "SOREX",
-                        value: "1000324103190-PC",
-                    },
-                    {
                         name: "POLAR",
                         value: "1012700580904-PC",
                     },
                     {
-                        name: "RUBGOOSE",
-                        value: "1003009770501-PC",
+                        name: "PH4M1",
+                        value: "1001040582944-PC",
                     },
                     {
-                        name: "JACOBFIS",
-                        value: "1012591384606-PC",
-                    },
-                    {
-                        name: "SILASBILLUM",
-                        value: "1012989559521-PC",
-                    },
-                    {
-                        name: "AGGLITERBOW",
-                        value: "3101010257554911893-PS4",
+                        name: "MEEJI",
+                        value: "1000324103190-PC",
                     },
                     {
                         name: "PATTECARMY",
                         value: "1008903736273-PC",
                     },
                     {
-                        name: "Z1LVER",
-                        value: "1009143499944-PC",
+                        name: "RUBGOOSE",
+                        value: "1003009770501-PC",
                     },
                     {
                         name: "SWEETPOISON",
                         value: "2510156661-PC",
-                    }
+                    },
+                    {
+                        name: "Z1LVER",
+                        value: "1009143499944-PC",
+                    },
+                    {
+                        name: "JACOBFIS",
+                        value: "1012591384606-PC",
+                    },
                 ),
         )
         .setContexts(

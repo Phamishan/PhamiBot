@@ -13,7 +13,7 @@ module.exports = {
     data: new SlashCommandBuilder()
         .setName("me")
         .setDescription(
-            "Finds YOUR VALORANT profile (ONLY OG PLACEHOLDER & IN ORTUM)",
+            "Finds YOUR VALORANT profile (ONLY OG PLACEHOLDER & PREMIUMHOLDERS)",
         )
         .setContexts(
             InteractionContextType.Guild,
@@ -30,30 +30,27 @@ module.exports = {
         let playerInfo = await getPlayerInfoByPUUID(puuid);
 
         const userMapping = {
+            "354319727859859458": {
+                puuid: "9851fa96-8b72-5f43-8bd0-5bba32e5fb09",
+            }, // Patrick
             "336187495978893312": {
                 puuid: "796c8a28-4293-5bbf-9183-5d95cdce243a",
             }, // Phamishan
             "242237129017524225": {
                 puuid: "6176f10e-62ec-5845-8944-44a2225bda89",
             }, // Laue
-            "219518001366433792": {
-                puuid: "fa9712ff-bd06-5ed8-9afa-a82f930e656b",
-            }, // Malthe
-            "354319727859859458": {
-                puuid: "9851fa96-8b72-5f43-8bd0-5bba32e5fb09",
-            }, // Patrick
-            "303120606805622784": {
-                puuid: "13094cd6-3723-595e-8ff4-d0d718a4ed68",
-            }, // Jacob
             "104310174105214976": {
                 puuid: "bed24b11-7de7-5a5e-98c4-49c677c6b2af",
             }, // Mathias
-            "889501948410232842": {
-                puuid: "dcf5e34a-5d74-552b-bdeb-e97e3cbb7b80",
-            }, // Lucas
-            "1029255296301924383": {
-                puuid: "61173b3a-036b-5fcc-9184-30510d44ba13",
-            }, // Leileii
+            "219518001366433792": {
+                puuid: "fa9712ff-bd06-5ed8-9afa-a82f930e656b",
+            }, // Malthe
+            "693130776778113114": {
+                puuid: "9d934de8-d758-5ebf-a098-b139f4057e75",
+            }, // Julie
+            "303120606805622784": {
+                puuid: "13094cd6-3723-595e-8ff4-d0d718a4ed68",
+            }, // Jacob
             "763469137351540767": {
                 puuid: "9aee3e0d-1bd1-5ece-9fed-c6843e11282a",
             }, // Benjamin

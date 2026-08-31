@@ -16,7 +16,7 @@ module.exports = {
     data: new SlashCommandBuilder()
         .setName("valrankfriends")
         .setDescription(
-            "Finds VALORANT profile (ONLY OG PLACEHOLDER & IN ORTUM)",
+            "Finds VALORANT profile (ONLY OG PLACEHOLDER & PREMIUMHOLDERS)",
         )
         .addStringOption((option) =>
             option
@@ -25,24 +25,28 @@ module.exports = {
                 .setRequired(true)
                 .addChoices(
                     {
+                        name: "POLAR",
+                        value: "9851fa96-8b72-5f43-8bd0-5bba32e5fb09",
+                    },
+                    {
                         name: "PH4M1",
                         value: "796c8a28-4293-5bbf-9183-5d95cdce243a",
                     },
                     {
-                        name: "SOREX",
+                        name: "MEEJI",
                         value: "6176f10e-62ec-5845-8944-44a2225bda89",
                     },
                     {
-                        name: "POLAR",
-                        value: "9851fa96-8b72-5f43-8bd0-5bba32e5fb09",
+                        name: "PATTECARMY",
+                        value: "bed24b11-7de7-5a5e-98c4-49c677c6b2af",
                     },
                     {
                         name: "RUBGOOSE",
                         value: "fa9712ff-bd06-5ed8-9afa-a82f930e656b",
                     },
                     {
-                        name: "PATTECARMY",
-                        value: "bed24b11-7de7-5a5e-98c4-49c677c6b2af",
+                        name: "SWEETPOISON",
+                        value: "9d934de8-d758-5ebf-a098-b139f4057e75",
                     },
                     {
                         name: "Z1LVER",

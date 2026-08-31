@@ -10,7 +10,7 @@ const getTeamInfo = require("../controllers/premierTeam.js");
 module.exports = {
     data: new SlashCommandBuilder()
         .setName("premierteam")
-        .setDescription("Finds Premier teams, e.g. In Ortum#IO")
+        .setDescription("Finds Premier teams, e.g. PlaceHoldia#PLH")
         .addStringOption((option) =>
             option
                 .setName("input")
