@@ -95,11 +95,13 @@ function getMatchOutcome(match, playerName) {
 function buildRankHistoryText(games, matches, playerName, size = 5) {
     if (!games || games.length === 0) return "No ranked games played yet.";
 
+    const sortedGames = [...games].sort((a, b) => b.date_raw - a.date_raw);
+
     const matchesById = new Map(
         (matches || []).map((match) => [match.metadata?.matchid, match]),
     );
 
-    return games
+    return sortedGames
         .slice(0, size)
         .map((game) => {
             const match = matchesById.get(game.match_id);

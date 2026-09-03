@@ -170,3 +170,5 @@ Finds the current and next map [RANKED] (Apex Legends)
   - Updated -/addserver
   - Updated -/checkserver
   - Updated -/deleteserver
+- 2.2.5 - 03/09/2026
+  - Updated -/premierteam

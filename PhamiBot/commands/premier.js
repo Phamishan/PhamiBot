@@ -90,13 +90,31 @@ module.exports = {
             }
         }
 
-        const { wins, losses } = teamInfo.data.stats;
+        const sortedMatches = [...teamHistory.data.league_matches].sort(
+            (a, b) => new Date(b.started_at) - new Date(a.started_at),
+        );
+        const leagueMatches = sortedMatches.slice(0, 5);
+
+        let wins = teamInfo.data.stats.wins;
+        let losses = teamInfo.data.stats.losses;
+        let currentPoints = teamInfo.data.placement.points;
+
+        if (sortedMatches.length > 0) {
+            wins = 0;
+            losses = 0;
+            for (const match of sortedMatches) {
+                const pointsDiff = match.points_after - match.points_before;
+                if (pointsDiff >= 50) wins++;
+                else if (pointsDiff !== 0) losses++;
+            }
+            currentPoints = sortedMatches[0].points_after;
+        }
+
         const winRate =
             wins + losses > 0 ? Math.round((wins / (wins + losses)) * 100) : 0;
-        const pointsBar = buildProgressBar(teamInfo.data.placement.points, 400);
+        const pointsBar = buildProgressBar(currentPoints, 400);
         const teamColor = hexStringToColor(teamInfo.data.customization.primary);
 
-        const leagueMatches = teamHistory.data.league_matches.slice(0, 5);
         let historyText = "No matches played yet.";
 
         if (leagueMatches.length > 0) {
@@ -131,7 +149,7 @@ module.exports = {
                 },
                 {
                     name: "Points",
-                    value: `${pointsBar} ${teamInfo.data.placement.points}/400`,
+                    value: `${pointsBar} ${currentPoints}/400`,
                     inline: false,
                 },
                 {
