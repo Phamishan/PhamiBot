@@ -13,6 +13,7 @@ const {
     getUuidForName,
     getCrafatarUrlFromUuid,
 } = require("../utils/minecraft");
+const { BRAND_COLORS } = require("../utils/embedStyle.js");
 
 module.exports = {
     data: new SlashCommandBuilder()
@@ -71,9 +72,9 @@ module.exports = {
         const row = new ActionRowBuilder().addComponents(menu);
 
         const embed = new EmbedBuilder()
-            .setTitle("Select a server")
+            .setTitle("⛏️ Select a server")
             .setDescription("Choose a server to see who is online")
-            .setColor(0xff0000)
+            .setColor(BRAND_COLORS.minecraft)
             .setTimestamp()
             .setFooter({
                 text: "Created by @phamishan",
@@ -123,7 +124,9 @@ function escapeDiscordFormatting(text) {
 }
 
 async function processSingleServer(interaction, server) {
-    const api = `https://api.mcsrvstat.us/2/${encodeURIComponent(server.ip)}`;
+    await interaction.deferReply();
+
+    const api = `https://api.mcsrvstat.us/3/${encodeURIComponent(server.ip)}`;
     let json = null;
     try {
         const res = await request(api, {
@@ -146,7 +149,7 @@ async function processSingleServer(interaction, server) {
             const snippet = text && text.slice ? text.slice(0, 200) : text;
             const lower = (snippet || "").toLowerCase();
             if (lower.includes("<html") || lower.includes("<!doctype html>")) {
-                return interaction.reply({
+                return interaction.editReply({
                     content: `Received HTML instead of JSON from the status API (status ${status}). The API may be down or returning an HTML error page. Try again later.`,
                     components: [],
                     embeds: [],
@@ -156,7 +159,7 @@ async function processSingleServer(interaction, server) {
                 lower.includes("rate limit") ||
                 lower.includes("too many requests")
             ) {
-                return interaction.reply({
+                return interaction.editReply({
                     content: `Status API svarer med rate-limit (status ${status}). Prøv igen om lidt.`,
                     components: [],
                     embeds: [],
@@ -166,14 +169,14 @@ async function processSingleServer(interaction, server) {
                 lower.startsWith("your request") ||
                 lower.includes("your request has been")
             ) {
-                return interaction.reply({
+                return interaction.editReply({
                     content: `Status API rejected the request (possibly blocked). Try again later or check the server IP.`,
                     components: [],
                     embeds: [],
                 });
             }
             console.error("Response snippet:", snippet);
-            return interaction.reply({
+            return interaction.editReply({
                 content: `Could not parse server status (non-JSON response, status ${status}).`,
                 components: [],
                 embeds: [],
@@ -181,7 +184,7 @@ async function processSingleServer(interaction, server) {
         }
     } catch (err) {
         console.error("Failed to fetch server status:", err);
-        return interaction.reply({
+        return interaction.editReply({
             content: "Could not fetch server status.",
             components: [],
             embeds: [],
@@ -189,7 +192,7 @@ async function processSingleServer(interaction, server) {
     }
 
     if (!json || !json.online) {
-        return interaction.reply({
+        return interaction.editReply({
             content: `Server **${server.name}** (${server.ip}) is offline or cannot be reached.`,
             components: [],
             embeds: [],
@@ -203,7 +206,7 @@ async function processSingleServer(interaction, server) {
 
     const attachments = [];
     if (onlineCount === 0 && players.length === 0) {
-        return interaction.reply({
+        return interaction.editReply({
             content: `No players online on **${server.name}** (${server.ip}).`,
             components: [],
             embeds: [],
@@ -211,18 +214,18 @@ async function processSingleServer(interaction, server) {
     }
 
     const mainEmbed = new EmbedBuilder()
-        .setTitle(`Players online on ${server.name}:`)
+        .setTitle(`⛏️ Players online on ${server.name}`)
         .setDescription(
             maxCount > 0
                 ? `${server.ip}\nOnline: **${onlineCount}/${maxCount}**`
                 : `${server.ip}\nOnline: **${onlineCount}**`,
         )
-        .setColor(0x00ff00)
+        .setColor(BRAND_COLORS.minecraft)
         .setTimestamp();
 
     // Many large servers expose player counts but hide the public player list.
     if (players.length === 0 && onlineCount > 0) {
-        return interaction.reply({
+        return interaction.editReply({
             embeds: [mainEmbed],
             content:
                 "This server does not expose a public player list via the status API.",
@@ -231,8 +234,10 @@ async function processSingleServer(interaction, server) {
     }
 
     const sample = players.slice(0, 9);
-    const uuidPromises = sample.map((name) =>
-        getUuidForName(name).catch(() => null),
+    const uuidPromises = sample.map((player) =>
+        player.uuid
+            ? Promise.resolve(player.uuid)
+            : getUuidForName(player.name).catch(() => null),
     );
     const resolved = await Promise.all(uuidPromises);
 
@@ -243,7 +248,7 @@ async function processSingleServer(interaction, server) {
         const avatarUrl = uuid
             ? getCrafatarUrlFromUuid(uuid, 64)
             : `https://crafatar.lundhahn.dk/avatars/${encodeURIComponent(
-                  p,
+                  p.name,
               )}?size=64&overlay=true`;
 
         let appended = false;
@@ -265,7 +270,7 @@ async function processSingleServer(interaction, server) {
                 );
                 playerEmbeds.push(
                     new EmbedBuilder()
-                        .setTitle(escapeDiscordFormatting(p))
+                        .setTitle(escapeDiscordFormatting(p.name))
                         .setThumbnail(`attachment://${fname}`)
                         .setColor(0x0099ff),
                 );
@@ -278,7 +283,7 @@ async function processSingleServer(interaction, server) {
         if (!appended) {
             playerEmbeds.push(
                 new EmbedBuilder()
-                    .setTitle(escapeDiscordFormatting(p))
+                    .setTitle(escapeDiscordFormatting(p.name))
                     .setThumbnail(avatarUrl)
                     .setColor(0x0099ff),
             );
@@ -287,7 +292,6 @@ async function processSingleServer(interaction, server) {
 
     const allEmbeds = [mainEmbed, ...playerEmbeds];
     try {
-        await interaction.deferReply();
         await interaction.editReply({
             embeds: allEmbeds,
             files: attachments,
@@ -295,9 +299,9 @@ async function processSingleServer(interaction, server) {
         return;
     } catch (err) {
         console.error(
-            "Failed to send editReply with attachments, falling back to reply without files:",
+            "Failed to send editReply with attachments, falling back to editReply without files:",
             err,
         );
-        return interaction.reply({ embeds: allEmbeds, components: [] });
+        return interaction.editReply({ embeds: allEmbeds, components: [] });
     }
 }

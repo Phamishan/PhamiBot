@@ -6,6 +6,7 @@ const {
 } = require("discord.js");
 const fs = require("node:fs");
 const path = require("node:path");
+const { BRAND_COLORS } = require("../utils/embedStyle.js");
 
 const OWNER_ID = "336187495978893312";
 
@@ -49,9 +50,9 @@ module.exports = {
         const row = new ActionRowBuilder().addComponents(menu);
 
         const embed = new EmbedBuilder()
-            .setTitle("Delete saved server")
+            .setTitle("⛏️ Delete saved server")
             .setDescription("Choose which server to delete.")
-            .setColor(0xff0000)
+            .setColor(BRAND_COLORS.minecraft)
             .setTimestamp();
 
         await interaction.reply({
@@ -103,11 +104,11 @@ module.exports = {
         }
 
         const embed = new EmbedBuilder()
-            .setTitle("Server deleted")
+            .setTitle("⛏️ Server deleted")
             .setDescription(
                 `Server **${server.name}** (${server.ip}) has been deleted.`
             )
-            .setColor(0x00ff00)
+            .setColor(BRAND_COLORS.minecraft)
             .setTimestamp();
 
         return interaction.update({

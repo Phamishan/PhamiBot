@@ -155,3 +155,18 @@ Finds the current and next map [RANKED] (Apex Legends)
   - Updated -/apexrankfriends
   - Updated -/me
   - Updated -/premier
+- 2.2.4 - 03/09/2026
+  - Updated -/premierteam
+  - Updated -/valrank
+  - Updated -/valrankfriends
+  - Updated -/me
+  - Updated -/apexrank
+  - Updated -/apexrankfriends
+  - Updated -/season
+  - Updated -/maprotation
+  - Updated -/bundles
+  - Updated -/server
+  - Updated -/commands
+  - Updated -/addserver
+  - Updated -/checkserver
+  - Updated -/deleteserver

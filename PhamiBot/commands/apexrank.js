@@ -5,6 +5,10 @@ const {
 } = require("discord.js");
 
 const { getApexStats } = require("../controllers/apexStats.js");
+const {
+    getApexRankColor,
+    buildProgressBar,
+} = require("../utils/embedStyle.js");
 
 // Create the slash command.
 module.exports = {
@@ -49,20 +53,32 @@ module.exports = {
 
             const embed = new EmbedBuilder()
                 .setTitle(`:crown: ${apexPlayerStats.global.name} :crown:`)
-                .setColor(0xff0000)
+                .setColor(
+                    getApexRankColor(apexPlayerStats.global.rank.rankName),
+                )
                 .addFields(
                     {
-                        name: "Account level:",
+                        name: "Account level",
                         value: `${apexPlayerStats.global.level}`,
+                        inline: true,
+                    },
+                    {
+                        name: "Level progress",
+                        value: `${buildProgressBar(apexPlayerStats.global.toNextLevelPercent, 100)} ${apexPlayerStats.global.toNextLevelPercent}%`,
+                        inline: true,
+                    },
+                    {
+                        name: "",
+                        value: "​",
                         inline: false,
                     },
                     {
-                        name: "Rank:",
+                        name: "Rank",
                         value: `${apexPlayerStats.global.rank.rankName} ${apexPlayerStats.global.rank.rankDiv}`,
                         inline: true,
                     },
                     {
-                        name: "Rank score:",
+                        name: "Rank score",
                         value: `${apexPlayerStats.global.rank.rankScore}`,
                         inline: true,
                     },

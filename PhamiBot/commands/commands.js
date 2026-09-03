@@ -3,6 +3,7 @@ const {
     EmbedBuilder,
     InteractionContextType,
 } = require("discord.js");
+const { BRAND_COLORS } = require("../utils/embedStyle.js");
 
 module.exports = {
     data: new SlashCommandBuilder()
@@ -21,21 +22,17 @@ module.exports = {
             const name = guild.name;
 
             const embed = new EmbedBuilder()
-                .setTitle("Commands")
-                .setDescription(`${name}'s commands`)
-                .setColor(0xff0000)
+                .setTitle(`:robot: ${name}'s commands`)
+                .setDescription("Overview of all commands")
+                .setColor(BRAND_COLORS.discord)
                 .addFields(
                     {
-                        name: ":robot: - ```/commands```",
-                        value: "Overview of all commands.",
+                        name: "",
+                        value: "​",
                     },
                     {
-                        name: ":rofl: - ```/placeholdermeme```",
-                        value: "Sends a random placeholder meme.",
-                    },
-                    {
-                        name: ":scroll: - ```/server```",
-                        value: "Server info.",
+                        name: "VALORANT",
+                        value: "​",
                     },
                     {
                         name: ":gun: - ```/valrank```",
@@ -62,16 +59,12 @@ module.exports = {
                         value: "Shows the current VALORANT episode and act",
                     },
                     {
-                        name: ":heavy_plus_sign: - ```/addserver```",
-                        value: "Add a Minecraft server to the list",
+                        name: "",
+                        value: "​",
                     },
                     {
-                        name: ":eyes: - ```/checkserver```",
-                        value: "Overview of all Minecraft servers",
-                    },
-                    {
-                        name: ":heavy_minus_sign: - ```/deleteserver```",
-                        value: "Remove a saved Minecraft server (PH4M1 ONLY :P)",
+                        name: "APEX LEGENDS",
+                        value: "​",
                     },
                     {
                         name: ":parachute: - ```/apexrank```",
@@ -84,6 +77,46 @@ module.exports = {
                     {
                         name: ":map: - ```/maprotation```",
                         value: "Finds the current and next map [RANKED] (Apex Legends)",
+                    },
+                    {
+                        name: "",
+                        value: "​",
+                    },
+                    {
+                        name: "MINECRAFT",
+                        value: "​",
+                    },
+                    {
+                        name: ":heavy_plus_sign: - ```/addserver```",
+                        value: "Add a Minecraft server to the list",
+                    },
+                    {
+                        name: ":eyes: - ```/checkserver```",
+                        value: "Overview of all Minecraft servers",
+                    },
+                    {
+                        name: ":heavy_minus_sign: - ```/deleteserver```",
+                        value: "Remove a saved Minecraft server (PH4M1 ONLY :P)",
+                    },
+                    {
+                        name: "",
+                        value: "​",
+                    },
+                    {
+                        name: "MISC",
+                        value: "​",
+                    },
+                    {
+                        name: ":robot: - ```/commands```",
+                        value: "Overview of all commands.",
+                    },
+                    {
+                        name: ":scroll: - ```/server```",
+                        value: "Server info.",
+                    },
+                    {
+                        name: ":rofl: - ```/placeholdermeme```",
+                        value: "Sends a random placeholder meme.",
                     },
                 )
                 .setTimestamp()

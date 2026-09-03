@@ -1,19 +1,19 @@
 {
-    "name": "phamibot",
-    "version": "2.2.2",
-    "description": "",
-    "main": "index.js",
-    "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1",
-        "start": "node ./PhamiBot/index.js"
-    },
-    "keywords": [],
-    "author": "",
-    "license": "ISC",
-    "dependencies": {
-        "discord.js": "^14.25.1",
-        "dotenv": "^16.6.1",
-        "jimp": "^0.16.13",
-        "undici": "^5.29.0"
-    }
+  "name": "phamibot",
+  "version": "2.2.4",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node ./PhamiBot/index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "discord.js": "^14.25.1",
+    "dotenv": "^16.6.1",
+    "jimp": "^1.6.1",
+    "undici": "^8.10.1"
+  }
 }

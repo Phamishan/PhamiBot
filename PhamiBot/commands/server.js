@@ -3,6 +3,7 @@ const {
     EmbedBuilder,
     ChannelType,
 } = require("discord.js");
+const { BRAND_COLORS } = require("../utils/embedStyle.js");
 
 module.exports = {
     data: new SlashCommandBuilder()
@@ -26,9 +27,10 @@ module.exports = {
             const roles = guild.roles.cache.size;
 
             const embed = new EmbedBuilder()
-                .setTitle("Server Info")
-                .setDescription(`${name}'s server information`)
-                .setColor(0xff0000)
+                .setTitle(`:bar_chart: ${name}`)
+                .setDescription("Server information")
+                .setColor(BRAND_COLORS.discord)
+                .setThumbnail(guild.iconURL({ size: 256 }))
                 .addFields(
                     {
                         name: ":calendar: Created on:",

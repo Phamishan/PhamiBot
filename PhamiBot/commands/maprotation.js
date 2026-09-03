@@ -5,6 +5,7 @@ const {
 } = require("discord.js");
 
 const { getMapRotation } = require("../controllers/apexMapRotation.js");
+const { BRAND_COLORS } = require("../utils/embedStyle.js");
 
 // Create the slash command.
 module.exports = {
@@ -87,7 +88,7 @@ module.exports = {
             // Create the embed for successful response
             const embed = new EmbedBuilder()
                 .setTitle(":map: Apex Map Rotation [RANKED] :map:")
-                .setColor(0xff0000)
+                .setColor(BRAND_COLORS.apex)
                 .addFields(
                     {
                         name: "Current Map",

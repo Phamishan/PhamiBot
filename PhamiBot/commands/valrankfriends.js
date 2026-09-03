@@ -6,7 +6,13 @@ const {
 
 const getPlayerRank = require("../controllers/playerRank.js");
 const getPlayerInfoByPUUID = require("../controllers/playerInfoByPUUID.js");
-const getLastFiveMatches = require("../controllers/lastFiveMatches.js");
+const getRankHistory = require("../controllers/rankHistory.js");
+const getRecentMatches = require("../controllers/recentMatches.js");
+const {
+    getValorantRankColor,
+    buildRankHistoryText,
+    buildRrBar,
+} = require("../utils/embedStyle.js");
 
 let playerName = "";
 let playerTag = "";
@@ -75,7 +81,8 @@ module.exports = {
 
         // Pass the input to the methods which is created in the controllers folder.
         const playerRank = await getPlayerRank(playerName, playerTag);
-        const playerMatches = await getLastFiveMatches(playerName, playerTag);
+        const rankHistory = await getRankHistory(playerName, playerTag);
+        const recentMatches = await getRecentMatches(playerName, playerTag);
 
         const errorMessages = {
             404: "The entity was not found (player/match/general data)",
@@ -86,9 +93,11 @@ module.exports = {
             503: "Riot API seems to be down, API unable to connect",
         };
 
-        const errorStatus = [playerRank.status, playerInfo.status].find(
-            (status) => errorMessages[status],
-        );
+        const errorStatus = [
+            playerRank.status,
+            playerInfo.status,
+            rankHistory.status,
+        ].find((status) => errorMessages[status]);
 
         if (errorStatus) {
             const errorEmbed = new EmbedBuilder()
@@ -98,32 +107,39 @@ module.exports = {
             return interaction.editReply({ embeds: [errorEmbed] });
         }
         // Creating the embed
+        const rankTier = playerRank.data.current_data.currenttierpatched;
+        const rr = playerRank.data.current_data.ranking_in_tier;
+        const rrBar = buildRrBar(rankTier, rr);
         const embed = new EmbedBuilder()
             .setTitle(
                 `:crown: ${playerInfo.data.name}` +
                     "#" +
                     `${playerInfo.data.tag} :crown:`,
             )
-            .setColor(0xff0000)
+            .setColor(getValorantRankColor(rankTier))
             .addFields(
                 {
-                    name: "Account level:",
+                    name: "Account level",
                     value: `${playerInfo.data.account_level}`,
                     inline: false,
                 },
                 {
-                    name: "Rank:",
-                    value: `${playerRank.data.current_data.currenttierpatched}`,
+                    name: "Rank",
+                    value: `${rankTier}`,
                     inline: true,
                 },
                 {
-                    name: "RR:",
-                    value: `${playerRank.data.current_data.ranking_in_tier}`,
+                    name: "RR",
+                    value: rrBar ? `${rrBar} ${rr} RR` : `${rr} RR`,
                     inline: true,
                 },
                 {
-                    name: "Last 5 ranked games:",
-                    value: `${playerMatches}`,
+                    name: "Last 5 ranked games",
+                    value: buildRankHistoryText(
+                        rankHistory.data,
+                        recentMatches.data,
+                        playerName,
+                    ),
                     inline: false,
                 },
             )

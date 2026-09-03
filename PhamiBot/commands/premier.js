@@ -5,6 +5,11 @@ const {
 } = require("discord.js");
 
 const getTeamInfo = require("../controllers/premierTeam.js");
+const getTeamHistory = require("../controllers/premierHistory.js");
+const {
+    hexStringToColor,
+    buildProgressBar,
+} = require("../utils/embedStyle.js");
 
 // Create the slash command.
 module.exports = {
@@ -33,6 +38,7 @@ module.exports = {
 
         // Pass the input to the methods which is created in the controllers folder.
         const teamInfo = await getTeamInfo(premierName, premierTag);
+        const teamHistory = await getTeamHistory(premierName, premierTag);
 
         const errorMessages = {
             404: "The entity was not found (player/match/general data)",
@@ -43,7 +49,7 @@ module.exports = {
             503: "Riot API seems to be down, API unable to connect",
         };
 
-        const errorStatus = [teamInfo.status].find(
+        const errorStatus = [teamInfo.status, teamHistory.status].find(
             (status) => errorMessages[status],
         );
 
@@ -84,37 +90,64 @@ module.exports = {
             }
         }
 
+        const { wins, losses } = teamInfo.data.stats;
+        const winRate =
+            wins + losses > 0 ? Math.round((wins / (wins + losses)) * 100) : 0;
+        const pointsBar = buildProgressBar(teamInfo.data.placement.points, 400);
+        const teamColor = hexStringToColor(teamInfo.data.customization.primary);
+
+        const leagueMatches = teamHistory.data.league_matches.slice(0, 5);
+        let historyText = "No matches played yet.";
+
+        if (leagueMatches.length > 0) {
+            historyText = leagueMatches
+                .map((match) => {
+                    const pointsDiff = match.points_after - match.points_before;
+                    const timestamp = Math.floor(
+                        new Date(match.started_at).getTime() / 1000,
+                    );
+
+                    let emoji = "<:oooooh:1247454304894189620>";
+                    if (pointsDiff >= 50) {
+                        emoji = "<:goodjob:1244552467262214185>";
+                    } else if (pointsDiff !== 0) {
+                        emoji = "<:cri:1244552398643531877>";
+                    }
+
+                    return `${emoji} ${pointsDiff >= 0 ? "+" : ""}${pointsDiff} Points • <t:${timestamp}:R>`;
+                })
+                .join("\n");
+        }
+
         // Creating the embed
         const embed = new EmbedBuilder()
-            .setTitle(
-                `:crown: ${teamInfo.data.name}` +
-                    "#" +
-                    `${teamInfo.data.tag} :crown:`,
-            )
-            .setColor(0xff0000)
+            .setTitle(`${teamInfo.data.name}` + "#" + `${teamInfo.data.tag}`)
+            .setColor(teamColor)
             .addFields(
                 {
-                    name: "Wins:",
-                    value: `${teamInfo.data.stats.wins}`,
+                    name: "Record",
+                    value: `${wins}W - ${losses}L  (${winRate}% winrate)`,
+                    inline: false,
                 },
                 {
-                    name: "Losses:",
-                    value: `${teamInfo.data.stats.losses}`,
+                    name: "Points",
+                    value: `${pointsBar} ${teamInfo.data.placement.points}/400`,
+                    inline: false,
                 },
                 {
-                    name: "Points:",
-                    value: `${teamInfo.data.placement.points}` + "/600",
+                    name: "Rank",
+                    value: `${teamInfo.data.placement.place} in ${teamInfo.data.placement.conference}`,
                     inline: true,
                 },
                 {
-                    name: "Ranking:",
-                    value: `${teamInfo.data.placement.place}`,
-                    inline: true,
-                },
-                {
-                    name: "Division:",
+                    name: "Division",
                     value: `${divsionRank}`,
                     inline: true,
+                },
+                {
+                    name: "Last 5 premier matches",
+                    value: historyText,
+                    inline: false,
                 },
             )
             .setThumbnail(

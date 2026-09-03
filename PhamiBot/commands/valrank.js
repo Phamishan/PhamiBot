@@ -6,8 +6,14 @@ const {
 
 const getPlayerRank = require("../controllers/playerRank.js");
 const getPlayerInfo = require("../controllers/playerInfo.js");
-const getLastFiveMatches = require("../controllers/lastFiveMatches.js");
+const getRankHistory = require("../controllers/rankHistory.js");
+const getRecentMatches = require("../controllers/recentMatches.js");
 const getPlayerCard = require("../controllers/playerCard.js");
+const {
+    getValorantRankColor,
+    buildRankHistoryText,
+    buildRrBar,
+} = require("../utils/embedStyle.js");
 
 // Create the slash command.
 module.exports = {
@@ -37,7 +43,8 @@ module.exports = {
             // Fetch data from APIs
             const playerRank = await getPlayerRank(playerName, playerTag);
             const playerInfo = await getPlayerInfo(playerName, playerTag);
-            const playerMatches = await getLastFiveMatches(
+            const rankHistory = await getRankHistory(playerName, playerTag);
+            const recentMatches = await getRecentMatches(
                 playerName,
                 playerTag,
             );
@@ -56,6 +63,7 @@ module.exports = {
                 playerRank.status,
                 playerInfo.status,
                 playerCard.status,
+                rankHistory.status,
             ].find((status) => errorMessages[status]);
 
             if (errorStatus) {
@@ -67,30 +75,37 @@ module.exports = {
             }
 
             // Create the embed for successful response
+            const rankTier = playerRank.data.current_data.currenttierpatched;
+            const rr = playerRank.data.current_data.ranking_in_tier;
+            const rrBar = buildRrBar(rankTier, rr);
             const embed = new EmbedBuilder()
                 .setTitle(
                     `:crown: ${playerInfo.data.name}#${playerInfo.data.tag} :crown:`,
                 )
-                .setColor(0xff0000)
+                .setColor(getValorantRankColor(rankTier))
                 .addFields(
                     {
-                        name: "Account level:",
+                        name: "Account level",
                         value: `${playerInfo.data.account_level}`,
                         inline: false,
                     },
                     {
-                        name: "Rank:",
-                        value: `${playerRank.data.current_data.currenttierpatched}`,
+                        name: "Rank",
+                        value: `${rankTier}`,
                         inline: true,
                     },
                     {
-                        name: "RR:",
-                        value: `${playerRank.data.current_data.ranking_in_tier}`,
+                        name: "RR",
+                        value: rrBar ? `${rrBar} ${rr} RR` : `${rr} RR`,
                         inline: true,
                     },
                     {
-                        name: "Last 5 ranked games:",
-                        value: `${playerMatches}`,
+                        name: "Last 5 ranked games",
+                        value: buildRankHistoryText(
+                            rankHistory.data,
+                            recentMatches.data,
+                            playerName,
+                        ),
                         inline: false,
                     },
                 )

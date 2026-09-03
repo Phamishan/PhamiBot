@@ -5,6 +5,7 @@ const {
 } = require("discord.js");
 
 const getSeason = require("../controllers/searchForSeason.js");
+const { BRAND_COLORS, buildProgressBar } = require("../utils/embedStyle.js");
 
 // Create the slash command.
 module.exports = {
@@ -73,13 +74,21 @@ module.exports = {
                 return interaction.editReply({ embeds: [notFoundEmbed] });
             }
 
+            const actStartUnix = Math.floor(
+                new Date(currentAct.startTime).getTime() / 1000,
+            );
             const actEndUnix = Math.floor(
                 new Date(currentAct.endTime).getTime() / 1000,
+            );
+            const nowUnix = Math.floor(now.getTime() / 1000);
+            const actProgress = buildProgressBar(
+                nowUnix - actStartUnix,
+                actEndUnix - actStartUnix,
             );
 
             const embed = new EmbedBuilder()
                 .setTitle(":calendar: VALORANT Season :calendar:")
-                .setColor(0xff0000)
+                .setColor(BRAND_COLORS.valorant)
                 .addFields(
                     {
                         name: "Current Episode",
@@ -90,6 +99,11 @@ module.exports = {
                         name: "Current Act",
                         value: currentAct.displayName || "Unavailable",
                         inline: true,
+                    },
+                    {
+                        name: "Act Progress",
+                        value: actProgress,
+                        inline: false,
                     },
                     {
                         name: "Act Ends",

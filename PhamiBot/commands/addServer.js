@@ -1,6 +1,7 @@
 const { SlashCommandBuilder, EmbedBuilder } = require("discord.js");
 const fs = require("node:fs");
 const path = require("node:path");
+const { BRAND_COLORS } = require("../utils/embedStyle.js");
 
 module.exports = {
     data: new SlashCommandBuilder()
@@ -45,11 +46,11 @@ module.exports = {
         }
 
         const embed = new EmbedBuilder()
-            .setTitle("Server added")
+            .setTitle("⛏️ Server added")
             .setDescription(
                 `Server **${serverName}** with IP **${serverIp}** has been added.`
             )
-            .setColor(0x00ff00)
+            .setColor(BRAND_COLORS.minecraft)
             .setTimestamp()
             .setFooter({
                 text: "Created by @phamishan",

@@ -9,6 +9,7 @@ const {
 
 const getBundles = require("../controllers/bundles.js");
 const getBundleImage = require("../controllers/bundleImage.js");
+const { BRAND_COLORS } = require("../utils/embedStyle.js");
 
 // Create the slash command.
 module.exports = {
@@ -45,7 +46,7 @@ module.exports = {
                         .setTitle(
                             `:information_source: ${bundleImage.data[i].displayName} | ${bundles.data[bundleIndex].bundle_price} VP :information_source:`,
                         )
-                        .setColor(0xff0000)
+                        .setColor(BRAND_COLORS.valorant)
                         .setImage(`${bundleImage.data[i].displayIcon}`)
                         .setTimestamp()
                         .setFooter({
@@ -71,7 +72,7 @@ module.exports = {
                             .setTitle(
                                 `:moneybag: ${bundles.data[bundleIndex].items[j].name} | ${bundles.data[bundleIndex].items[j].base_price} VP :moneybag:`,
                             )
-                            .setColor(0xff0000)
+                            .setColor(BRAND_COLORS.valorant)
                             .setImage(
                                 `${bundles.data[bundleIndex].items[j].image}`,
                             )
@@ -92,7 +93,7 @@ module.exports = {
                         .setDescription(
                             `**${bundles.data[bundleIndex].bundle_price} VP**`,
                         )
-                        .setColor(0xff0000)
+                        .setColor(BRAND_COLORS.valorant)
                         .setTimestamp()
                         .setFooter({
                             text: "Created by @phamishan",
