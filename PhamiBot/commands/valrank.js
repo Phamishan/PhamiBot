@@ -14,6 +14,7 @@ const {
     buildRankHistoryText,
     buildRrBar,
 } = require("../utils/embedStyle.js");
+const { getResponseStatus } = require("../utils/apiStatus.js");
 
 // Create the slash command.
 module.exports = {
@@ -60,11 +61,13 @@ module.exports = {
             };
 
             const errorStatus = [
-                playerRank.status,
-                playerInfo.status,
-                playerCard.status,
-                rankHistory.status,
-            ].find((status) => errorMessages[status]);
+                playerRank,
+                playerInfo,
+                playerCard,
+                rankHistory,
+            ]
+                .map(getResponseStatus)
+                .find((status) => errorMessages[status]);
 
             if (errorStatus) {
                 const errorEmbed = new EmbedBuilder()

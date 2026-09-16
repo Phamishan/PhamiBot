@@ -10,6 +10,7 @@ const {
     hexStringToColor,
     buildProgressBar,
 } = require("../utils/embedStyle.js");
+const { getResponseStatus } = require("../utils/apiStatus.js");
 
 // Create the slash command.
 module.exports = {
@@ -49,9 +50,9 @@ module.exports = {
             503: "Riot API seems to be down, API unable to connect",
         };
 
-        const errorStatus = [teamInfo.status, teamHistory.status].find(
-            (status) => errorMessages[status],
-        );
+        const errorStatus = [teamInfo, teamHistory]
+            .map(getResponseStatus)
+            .find((status) => errorMessages[status]);
 
         if (errorStatus) {
             const errorEmbed = new EmbedBuilder()
@@ -112,7 +113,7 @@ module.exports = {
 
         const winRate =
             wins + losses > 0 ? Math.round((wins / (wins + losses)) * 100) : 0;
-        const pointsBar = buildProgressBar(currentPoints, 400);
+        const pointsBar = buildProgressBar(currentPoints, 450);
         const teamColor = hexStringToColor(teamInfo.data.customization.primary);
 
         let historyText = "No matches played yet.";
@@ -149,7 +150,7 @@ module.exports = {
                 },
                 {
                     name: "Points",
-                    value: `${pointsBar} ${currentPoints}/400`,
+                    value: `${pointsBar} ${currentPoints}/450`,
                     inline: false,
                 },
                 {

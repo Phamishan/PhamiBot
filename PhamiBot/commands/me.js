@@ -13,6 +13,7 @@ const {
     buildRankHistoryText,
     buildRrBar,
 } = require("../utils/embedStyle.js");
+const { getResponseStatus } = require("../utils/apiStatus.js");
 
 // Create the slash command.
 module.exports = {
@@ -93,11 +94,9 @@ module.exports = {
             503: "Riot API seems to be down, API unable to connect",
         };
 
-        const errorStatus = [
-            playerRank.status,
-            playerInfo.status,
-            rankHistory.status,
-        ].find((status) => errorMessages[status]);
+        const errorStatus = [playerRank, playerInfo, rankHistory]
+            .map(getResponseStatus)
+            .find((status) => errorMessages[status]);
 
         if (errorStatus) {
             const errorEmbed = new EmbedBuilder()
