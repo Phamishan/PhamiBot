@@ -175,3 +175,5 @@ Finds the current and next map [RANKED] (Apex Legends)
 - 2.2.6 - 16/09/2026
   - Updated -/premierteam
   - Fixed api status
+- 2.2.7 - 07/10/2026
+  - Updated -/me

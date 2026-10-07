@@ -58,7 +58,7 @@ module.exports = {
             "303120606805622784": {
                 puuid: "13094cd6-3723-595e-8ff4-d0d718a4ed68",
             }, // Jacob
-            "763469137351540767": {
+            "1487957053732425830": {
                 puuid: "9aee3e0d-1bd1-5ece-9fed-c6843e11282a",
             }, // Benjamin
         };
@@ -75,7 +75,9 @@ module.exports = {
             const errorEmbed = new EmbedBuilder()
                 .setTitle(`Error`)
                 .setColor(0xff0000)
-                .setDescription("ikke en del af OG placeholder, unlucky");
+                .setDescription(
+                    "ikke en del af OG placeholder eller premiumholders, unlucky",
+                );
 
             return interaction.editReply({ embeds: [errorEmbed] });
         }
