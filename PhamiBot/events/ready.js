@@ -9,7 +9,7 @@ module.exports = {
                 {
                     type: ActivityType.Custom,
                     name: "custom",
-                    state: "TESTING",
+                    state: "✨ /commands ✨",
                 },
             ],
         });
