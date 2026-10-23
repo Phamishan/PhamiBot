@@ -113,7 +113,7 @@ module.exports = {
 
         const winRate =
             wins + losses > 0 ? Math.round((wins / (wins + losses)) * 100) : 0;
-        const pointsBar = buildProgressBar(currentPoints, 450);
+        const pointsBar = buildProgressBar(currentPoints, 600);
         const teamColor = hexStringToColor(teamInfo.data.customization.primary);
 
         let historyText = "No matches played yet.";
@@ -150,7 +150,7 @@ module.exports = {
                 },
                 {
                     name: "Points",
-                    value: `${pointsBar} ${currentPoints}/450`,
+                    value: `${pointsBar} ${currentPoints}/600`,
                     inline: false,
                 },
                 {
