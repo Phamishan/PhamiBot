@@ -1,26 +1,13 @@
-const getApexStats = async (input) => {
-    try {
-        const data = await fetch(
-            `https://api.mozambiquehe.re/bridge?auth=${process.env.AL_API}&player=${input}&platform=PC`,
-        );
-        return await data.json();
-    } catch (error) {
-        return { status: 500, error: error.message };
-    }
-};
+const { fetchApex } = require("./apexApi.js");
 
-const getApexStatsUUID = async (input) => {
-    try {
-        const UUID = input.split("-")[0];
-        const PLATFORM = input.split("-")[1];
+const getApexStats = (input) =>
+    fetchApex("bridge", { player: input, platform: "PC" });
 
-        const data = await fetch(
-            `https://api.mozambiquehe.re/bridge?auth=${process.env.AL_API}&uid=${UUID}&platform=${PLATFORM}`,
-        );
-        return await data.json();
-    } catch (error) {
-        return { status: 500, error: error.message };
-    }
+const getApexStatsUUID = (input) => {
+    const UUID = input.split("-")[0];
+    const PLATFORM = input.split("-")[1];
+
+    return fetchApex("bridge", { uid: UUID, platform: PLATFORM });
 };
 
 module.exports = { getApexStats, getApexStatsUUID };

@@ -5,6 +5,7 @@ const {
 } = require("discord.js");
 
 const { getApexStatsUUID } = require("../controllers/apexStats.js");
+const { getApexErrorMessage } = require("../controllers/apexApi.js");
 const {
     getApexRankColor,
     buildProgressBar,
@@ -75,7 +76,9 @@ module.exports = {
                 const errorEmbed = new EmbedBuilder()
                     .setTitle("Error")
                     .setColor(0xff0000)
-                    .setDescription("Apex Legends profile not found.");
+                    .setDescription(
+                        getApexErrorMessage(apexPlayerStatsUUID.status),
+                    );
                 return interaction.editReply({ embeds: [errorEmbed] });
             }
 
@@ -87,8 +90,13 @@ module.exports = {
                 apexPlayerStatsUUID.legends.all[selectedLegend].ImgAssets
                     .banner;
 
+            const clubTag = apexPlayerStatsUUID.global.tag;
+            const playerName = clubTag
+                ? `[${clubTag}] ${apexPlayerStatsUUID.global.name}`
+                : apexPlayerStatsUUID.global.name;
+
             const embed = new EmbedBuilder()
-                .setTitle(`:crown: ${apexPlayerStatsUUID.global.name} :crown:`)
+                .setTitle(`:crown: ${playerName} :crown:`)
                 .setColor(
                     getApexRankColor(apexPlayerStatsUUID.global.rank.rankName),
                 )

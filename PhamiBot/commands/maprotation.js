@@ -5,6 +5,7 @@ const {
 } = require("discord.js");
 
 const { getMapRotation } = require("../controllers/apexMapRotation.js");
+const { getApexErrorMessage } = require("../controllers/apexApi.js");
 const { BRAND_COLORS } = require("../utils/embedStyle.js");
 
 // Create the slash command.
@@ -26,64 +27,25 @@ module.exports = {
             // Fetch data from API
             const mapRotation = await getMapRotation();
 
-            if (
-                !mapRotation ||
-                mapRotation.error ||
-                mapRotation.status >= 400
-            ) {
+            if (mapRotation.Error) {
                 const errorEmbed = new EmbedBuilder()
                     .setTitle("Error")
                     .setColor(0xff0000)
-                    .setDescription(
-                        "Error occurred while fetching map rotation data.",
-                    );
+                    .setDescription(getApexErrorMessage(mapRotation.status));
                 return interaction.editReply({ embeds: [errorEmbed] });
             }
 
-            const currentMap =
-                mapRotation?.ranked?.current?.map ?? "Unavailable";
-            const nextMap = mapRotation?.ranked?.next?.map ?? "Unavailable";
+            const ranked = mapRotation?.br_ranked;
+            const currentMap = ranked?.current?.map ?? "Unavailable";
+            const nextMap = ranked?.next?.map ?? "Unavailable";
             const remainingTime =
-                mapRotation?.ranked?.current?.remainingTimer ||
-                mapRotation?.ranked?.current?.remainingMins ||
-                "Unavailable";
-            const currentMapImage = mapRotation?.ranked?.current?.asset || null;
+                ranked?.current?.remainingTimer ?? "Unavailable";
+            const currentMapImage = ranked?.current?.asset || null;
 
-            // Calculate Discord dynamic timestamp
-            let discordTimestamp = "";
-            if (remainingTime !== "Unavailable") {
-                const now = Date.now();
-                const endDate = new Date(now);
-
-                if (
-                    typeof mapRotation?.ranked?.current?.remainingMins ===
-                    "number"
-                ) {
-                    endDate.setMinutes(
-                        endDate.getMinutes() +
-                            mapRotation.ranked.current.remainingMins,
-                    );
-                } else if (
-                    typeof mapRotation?.ranked?.current?.remainingTimer ===
-                    "string"
-                ) {
-                    const timerStr = mapRotation.ranked.current.remainingTimer;
-                    const hourMatch = timerStr.match(/(\d+)h/);
-                    const minMatch = timerStr.match(/(\d+)m/);
-
-                    if (hourMatch)
-                        endDate.setHours(
-                            endDate.getHours() + parseInt(hourMatch[1]),
-                        );
-                    if (minMatch)
-                        endDate.setMinutes(
-                            endDate.getMinutes() + parseInt(minMatch[1]),
-                        );
-                }
-
-                const unixTimestamp = Math.floor(endDate.getTime() / 1000);
-                discordTimestamp = `<t:${unixTimestamp}:R>`;
-            }
+            // Discord dynamic timestamp from the API's end time
+            const discordTimestamp = ranked?.current?.end
+                ? ` (<t:${ranked.current.end}:R>)`
+                : "";
 
             // Create the embed for successful response
             const embed = new EmbedBuilder()
@@ -97,7 +59,7 @@ module.exports = {
                     },
                     {
                         name: "Time Remaining",
-                        value: `${remainingTime} (${discordTimestamp})`,
+                        value: `${remainingTime}${discordTimestamp}`,
                         inline: true,
                     },
                     {

@@ -48,6 +48,9 @@ Finds Apex Legends profile (ONLY OG PLACEHOLDER & PREMIUMHOLDERS)
 🗺️ - /maprotation
 Finds the current and next map [RANKED] (Apex Legends)
 
+📡 - /apexstatus
+Shows the Apex Legends server status
+
 ```
 
 ## TODO:
@@ -179,3 +182,12 @@ Finds the current and next map [RANKED] (Apex Legends)
   - Updated -/me
 - 2.2.8 - 23/10/2026
   - Updated -/premierteam
+- 2.2.9 - 02/11/2026
+  - Added new command -/apexstatus
+  - Moved Apex Legends API to api.apexlegendsstatus.com
+  - Updated -/maprotation
+  - Updated -/apexrank
+  - Updated -/apexrankfriends
+  - Updated join message
+  - Updated -/commands
+  - Updated readme

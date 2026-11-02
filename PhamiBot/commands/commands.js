@@ -79,6 +79,10 @@ module.exports = {
                         value: "Finds the current and next map [RANKED] (Apex Legends)",
                     },
                     {
+                        name: ":satellite: - ```/apexstatus```",
+                        value: "Shows the Apex Legends server status",
+                    },
+                    {
                         name: "",
                         value: "​",
                     },

@@ -81,6 +81,10 @@ const welcomeMessage = new EmbedBuilder()
             name: ":map: - ```/maprotation```",
             value: "Finds the current and next map [RANKED] (Apex Legends)",
         },
+        {
+            name: ":satellite: - ```/apexstatus```",
+            value: "Shows the Apex Legends server status",
+        },
     )
     .setTimestamp()
     .setFooter({
