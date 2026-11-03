@@ -10,7 +10,7 @@ const { BRAND_COLORS, buildProgressBar } = require("../utils/embedStyle.js");
 // Create the slash command.
 module.exports = {
     data: new SlashCommandBuilder()
-        .setName("season")
+        .setName("valseason")
         .setDescription("Shows the current VALORANT episode and act")
         .setContexts(
             InteractionContextType.Guild,

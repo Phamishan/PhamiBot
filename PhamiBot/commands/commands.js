@@ -55,7 +55,7 @@ module.exports = {
                         value: "Finds current VALORANT bundle(s)",
                     },
                     {
-                        name: ":calendar: - ```/season```",
+                        name: ":calendar: - ```/valseason```",
                         value: "Shows the current VALORANT episode and act",
                     },
                     {
@@ -81,6 +81,10 @@ module.exports = {
                     {
                         name: ":satellite: - ```/apexstatus```",
                         value: "Shows the Apex Legends server status",
+                    },
+                    {
+                        name: ":calendar: - ```/apexseason```",
+                        value: "Shows the current Apex Legends season",
                     },
                     {
                         name: "",

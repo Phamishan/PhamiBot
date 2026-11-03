@@ -27,7 +27,7 @@ Finds Premier teams, e.g. PlaceHoldia#PLH
 💰 - /bundles
 Finds current VALORANT bundle(s)
 
-📅 - /season
+📅 - /valseason
 Shows the current VALORANT episode and act
 
 ➕ - /addserver
@@ -50,6 +50,9 @@ Finds the current and next map [RANKED] (Apex Legends)
 
 📡 - /apexstatus
 Shows the Apex Legends server status
+
+📅 - /apexseason
+Shows the current Apex Legends season
 
 ```
 
@@ -188,6 +191,12 @@ Shows the Apex Legends server status
   - Updated -/maprotation
   - Updated -/apexrank
   - Updated -/apexrankfriends
+  - Updated join message
+  - Updated -/commands
+  - Updated readme
+- 2.3.0 - 03/11/2026
+  - Added new command -/apexseason
+  - Renamed -/season to -/valseason
   - Updated join message
   - Updated -/commands
   - Updated readme
