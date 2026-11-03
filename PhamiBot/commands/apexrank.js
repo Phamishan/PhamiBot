@@ -82,7 +82,7 @@ module.exports = {
                     },
                     {
                         name: "Rank",
-                        value: `${apexPlayerStats.global.rank.rankName} ${apexPlayerStats.global.rank.rankDiv}`,
+                        value: `${apexPlayerStats.global.rank.rankName}${apexPlayerStats.global.rank.rankDiv ? ` ${apexPlayerStats.global.rank.rankDiv}` : ""}`,
                         inline: true,
                     },
                     {
@@ -99,7 +99,8 @@ module.exports = {
                 });
 
             if (selectedLegendImage) {
-                embed.setImage(selectedLegendImage);
+                // Some banner URLs contain spaces (e.g. "mad maggie.jpg"), which Discord rejects.
+                embed.setImage(encodeURI(selectedLegendImage));
             }
 
             await interaction.editReply({ embeds: [embed] });
