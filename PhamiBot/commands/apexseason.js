@@ -25,6 +25,7 @@ module.exports = {
             const apexSeason = await getApexSeason();
 
             if (apexSeason.Error) {
+                console.error("/apexseason failed:", apexSeason.Error);
                 const errorEmbed = new EmbedBuilder()
                     .setTitle("Error")
                     .setColor(0xff0000)

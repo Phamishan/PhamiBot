@@ -11,7 +11,7 @@ const getRecentMatches = require("../controllers/recentMatches.js");
 const {
     getValorantRankColor,
     buildRankHistoryText,
-    buildRrBar,
+    formatRrProgress,
 } = require("../utils/embedStyle.js");
 const { getResponseStatus } = require("../utils/apiStatus.js");
 
@@ -110,7 +110,6 @@ module.exports = {
         // Creating the embed
         const rankTier = playerRank.data.current_data.currenttierpatched;
         const rr = playerRank.data.current_data.ranking_in_tier;
-        const rrBar = buildRrBar(rankTier, rr);
         const embed = new EmbedBuilder()
             .setTitle(
                 `:crown: ${playerInfo.data.name}` +
@@ -131,7 +130,7 @@ module.exports = {
                 },
                 {
                     name: "RR",
-                    value: rrBar ? `${rrBar} ${rr} RR` : `${rr} RR`,
+                    value: formatRrProgress(rankTier, rr),
                     inline: true,
                 },
                 {

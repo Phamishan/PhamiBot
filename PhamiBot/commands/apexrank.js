@@ -6,9 +6,11 @@ const {
 
 const { getApexStats } = require("../controllers/apexStats.js");
 const { getApexErrorMessage } = require("../controllers/apexApi.js");
+const { checkApexRankTable } = require("../utils/apexRankNotice.js");
 const {
     getApexRankColor,
-    buildProgressBar,
+    formatRpProgress,
+    formatApexRank,
 } = require("../utils/embedStyle.js");
 
 // Create the slash command.
@@ -59,39 +61,30 @@ module.exports = {
                 ? `[${clubTag}] ${apexPlayerStats.global.name}`
                 : apexPlayerStats.global.name;
 
+            const { rankName, rankDiv, rankScore, rankImg } =
+                apexPlayerStats.global.rank;
+
             const embed = new EmbedBuilder()
                 .setTitle(`:crown: ${playerName} :crown:`)
-                .setColor(
-                    getApexRankColor(apexPlayerStats.global.rank.rankName),
-                )
+                .setColor(getApexRankColor(rankName))
                 .addFields(
                     {
                         name: "Account level",
                         value: `${apexPlayerStats.global.level}`,
-                        inline: true,
-                    },
-                    {
-                        name: "Level progress",
-                        value: `${buildProgressBar(apexPlayerStats.global.toNextLevelPercent, 100)} ${apexPlayerStats.global.toNextLevelPercent}%`,
-                        inline: true,
-                    },
-                    {
-                        name: "",
-                        value: "​",
                         inline: false,
                     },
                     {
                         name: "Rank",
-                        value: `${apexPlayerStats.global.rank.rankName}${apexPlayerStats.global.rank.rankDiv ? ` ${apexPlayerStats.global.rank.rankDiv}` : ""}`,
+                        value: formatApexRank(rankName, rankDiv),
                         inline: true,
                     },
                     {
-                        name: "Rank score",
-                        value: `${apexPlayerStats.global.rank.rankScore}`,
+                        name: "RP",
+                        value: formatRpProgress(rankName, rankDiv, rankScore),
                         inline: true,
                     },
                 )
-                .setThumbnail(apexPlayerStats.global.rank.rankImg)
+                .setThumbnail(rankImg)
                 .setTimestamp()
                 .setFooter({
                     text: "Created by @phamishan",
@@ -104,6 +97,12 @@ module.exports = {
             }
 
             await interaction.editReply({ embeds: [embed] });
+
+            checkApexRankTable(
+                interaction.client,
+                apexPlayerStats.global.name,
+                apexPlayerStats.global.rank,
+            );
         } catch (error) {
             console.error(error);
             if (interaction.replied || interaction.deferred) {

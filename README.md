@@ -200,3 +200,10 @@ Shows the current Apex Legends season
   - Updated join message
   - Updated -/commands
   - Updated readme
+- 2.3.1 - 04/11/2026
+  - Updated -/apexrank
+  - Updated -/apexrankfriends
+  - Updated -/valrank
+  - Updated -/valrankfriends
+  - Updated -/me
+  - Updated readme
