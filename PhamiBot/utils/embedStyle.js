@@ -228,12 +228,11 @@ function buildApexMatchHistoryText(matches, size = 5) {
             }
 
             const sign = match.delta >= 0 ? "+" : "";
-            const map = match.map ?? "Unknown";
             const time = Math.floor(match.ts / 1000);
 
             const legend = match.legend ? ` • ${match.legend}` : "";
 
-            return `${emoji} ${sign}${match.delta} RP • ${map}${legend} • <t:${time}:R>`;
+            return `${emoji} ${sign}${match.delta} RP${legend} • <t:${time}:R>`;
         })
         .join("\n");
 }
