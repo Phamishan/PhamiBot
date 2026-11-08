@@ -58,7 +58,6 @@ Shows the current Apex Legends season
 
 ## TODO:
 
-- match history command
 - /valleaderboard :eyes:
 - Currency system
 - bets
@@ -203,6 +202,14 @@ Shows the current Apex Legends season
 - 2.3.1 - 04/11/2026
   - Updated -/apexrank
   - Updated -/apexrankfriends
+  - Updated -/valrank
+  - Updated -/valrankfriends
+  - Updated -/me
+  - Updated readme
+- 2.3.2 - 08/11/2026
+  - New bot avatar
+  - New embed footer icon
+  - Added match details to "last 5 ranked games"
   - Updated -/valrank
   - Updated -/valrankfriends
   - Updated -/me

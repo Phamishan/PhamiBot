@@ -1,3 +1,8 @@
+const {
+    BUTTON_PREFIX,
+    handleMatchButton,
+} = require("../utils/valorantMatchDetails.js");
+
 module.exports = {
     name: "interactionCreate",
     once: false,
@@ -24,6 +29,25 @@ module.exports = {
                 }
                 return interaction.followUp({
                     content: "An error occurred while handling the selection.",
+                });
+            }
+        }
+
+        if (
+            interaction.isButton() &&
+            interaction.customId.startsWith(`${BUTTON_PREFIX}:`)
+        ) {
+            try {
+                return await handleMatchButton(interaction);
+            } catch (err) {
+                console.error(err);
+                if (!interaction.replied && !interaction.deferred) {
+                    return interaction.reply({
+                        content: "An error occurred while opening the match.",
+                    });
+                }
+                return interaction.followUp({
+                    content: "An error occurred while opening the match.",
                 });
             }
         }

@@ -14,6 +14,7 @@ const {
     formatRrProgress,
 } = require("../utils/embedStyle.js");
 const { getResponseStatus } = require("../utils/apiStatus.js");
+const { buildMatchButtons } = require("../utils/valorantMatchDetails.js");
 
 let playerName = "";
 let playerTag = "";
@@ -146,9 +147,12 @@ module.exports = {
             .setTimestamp()
             .setFooter({
                 text: "Created by @phamishan",
-                iconURL: "https://i.imgur.com/sNTzfld.jpg",
+                iconURL: "https://raw.githubusercontent.com/Phamishan/PhamiBot/development/PhamiBot/pics/phamibot-avatar.png",
             });
         // Replying with the embed
-        interaction.editReply({ embeds: [embed] });
+        interaction.editReply({
+            embeds: [embed],
+            components: buildMatchButtons(rankHistory.data, input.value),
+        });
     },
 };

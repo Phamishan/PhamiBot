@@ -48,7 +48,7 @@ module.exports = {
                 .setTimestamp()
                 .setFooter({
                     text: "Created by @phamishan",
-                    iconURL: "https://i.imgur.com/sNTzfld.jpg",
+                    iconURL: "https://raw.githubusercontent.com/Phamishan/PhamiBot/development/PhamiBot/pics/phamibot-avatar.png",
                 });
             return interaction.reply({ embeds: [embed] });
         }
@@ -78,7 +78,7 @@ module.exports = {
             .setTimestamp()
             .setFooter({
                 text: "Created by @phamishan",
-                iconURL: "https://i.imgur.com/sNTzfld.jpg",
+                iconURL: "https://raw.githubusercontent.com/Phamishan/PhamiBot/development/PhamiBot/pics/phamibot-avatar.png",
             });
 
         await interaction.reply({

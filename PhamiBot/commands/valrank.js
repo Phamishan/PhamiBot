@@ -15,6 +15,7 @@ const {
     formatRrProgress,
 } = require("../utils/embedStyle.js");
 const { getResponseStatus } = require("../utils/apiStatus.js");
+const { buildMatchButtons } = require("../utils/valorantMatchDetails.js");
 
 // Create the slash command.
 module.exports = {
@@ -116,10 +117,16 @@ module.exports = {
                 .setTimestamp()
                 .setFooter({
                     text: "Created by @phamishan",
-                    iconURL: "https://i.imgur.com/sNTzfld.jpg",
+                    iconURL: "https://raw.githubusercontent.com/Phamishan/PhamiBot/development/PhamiBot/pics/phamibot-avatar.png",
                 });
 
-            await interaction.editReply({ embeds: [embed] });
+            await interaction.editReply({
+                embeds: [embed],
+                components: buildMatchButtons(
+                    rankHistory.data,
+                    playerInfo.data.puuid,
+                ),
+            });
         } catch (error) {
             console.error(error);
             if (interaction.replied || interaction.deferred) {

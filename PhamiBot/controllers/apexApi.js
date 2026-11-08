@@ -1,5 +1,3 @@
-// Shared fetch helper and error messages for the Apex Legends Status API.
-
 const BASE_URL = "https://api.apexlegendsstatus.com";
 
 const ERROR_MESSAGES = {
@@ -12,10 +10,12 @@ const ERROR_MESSAGES = {
     500: "The Apex API had an internal error. Try again later.",
 };
 
-// Returns the parsed body, or { Error, status } when the request fails.
 const fetchApex = async (endpoint, params = {}) => {
     try {
-        const query = new URLSearchParams({ auth: process.env.AL_API, ...params });
+        const query = new URLSearchParams({
+            auth: process.env.AL_API,
+            ...params,
+        });
         const response = await fetch(`${BASE_URL}/${endpoint}?${query}`);
         const body = await response.json().catch(() => ({}));
 

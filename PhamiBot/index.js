@@ -93,7 +93,7 @@ const welcomeMessage = new EmbedBuilder()
     .setTimestamp()
     .setFooter({
         text: "Created by @phamishan",
-        iconURL: "https://i.imgur.com/sNTzfld.jpg",
+        iconURL: "https://raw.githubusercontent.com/Phamishan/PhamiBot/development/PhamiBot/pics/phamibot-avatar.png",
     });
 
 client.on("guildCreate", (guild) => {
